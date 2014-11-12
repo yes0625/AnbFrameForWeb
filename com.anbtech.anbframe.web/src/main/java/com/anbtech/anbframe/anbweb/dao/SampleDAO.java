@@ -11,7 +11,7 @@ public class SampleDAO {
 	private JdbcTemplate jdbcTemplate;
 	/**
 	 * 접속확인용 시간확인 메서드
-	 *
+	 * [수정] 
 	 * @return the db time now
 	 */
 	public String getDbTimeNow(){
