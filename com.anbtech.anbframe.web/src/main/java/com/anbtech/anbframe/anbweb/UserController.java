@@ -37,6 +37,15 @@ public class UserController {
 		return list;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/user_all_g", method=RequestMethod.GET)
+	public List getUserAllGET() throws Exception{
+
+		List list = service.selectUser(new AnbUser());
+
+		return list;
+	}
+	
 	
 	@RequestMapping(value="/home_sjh", method=RequestMethod.GET)
 	public String getSJH() throws Exception{
@@ -75,8 +84,19 @@ public class UserController {
 		
 		vo.setUserBirth(null);
 		
-		service.saveOrUpdateUser(vo);
+		service.saveOrUpdateUser(vo);	
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/user_delete_sjh", method=RequestMethod.POST)
+	public Map deleteUserSJH(@RequestParam(value="userId")String userId) throws Exception {
+		Map<String,String> map = new HashMap<String,String>();
+		AnbUser vo = new AnbUser();
+		vo.setUserId(userId);
+		service.removeUser(vo);
 		
+		map.put("success", "성공적으로 삭제되었습니다.");
 		
+		return map;
 	}
 }

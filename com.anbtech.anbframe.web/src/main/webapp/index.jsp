@@ -58,13 +58,13 @@
 				
 				if(key=="sjh"){
 					url = "home_sjh.do";
-					tit = "서정환 차장, 이서정 사원이  개발한 화면입니다.";
+					tit = "서정환 차장, 이서정 사원이  담당한 화면입니다.";
 				}else if(key=="kys"){
 					url = "home_kys.do";
-					tit = "김영심 과장, 윤석완 사원이  개발한 화면입니다.";
+					tit = "김영심 과장, 윤석완 사원이  담당한 화면입니다.";
 				}else if(key=="khj"){
 					url = "home_khj.do";
-					tit = "권호진 과장, 김유원 사원이  개발한 화면입니다.";
+					tit = "권호진 과장, 김유원 사원이  담당한 화면입니다.";
 				}
 				
 				$("#display_area").load(url);

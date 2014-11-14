@@ -32,7 +32,7 @@
     <div id="toolbar">
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">신규사용자</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">Edit User</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">Remove User</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">선택삭제</a>
     </div>
     
     <div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
@@ -99,11 +99,19 @@
         function destroyUser(){
             var row = $('#dg').datagrid('getSelected');
             if (row){
-                $.messager.confirm('Confirm','Are you sure you want to destroy this user?',function(r){
+                $.messager.confirm('삭제확인','선택한 사용자를 삭제하시겠습니까?',function(r){
                     if (r){
-                        $.post('destroy_user.php',{id:row.id},function(result){
+                    	
+                        $.post('${pageContext.request.contextPath }/user_delete_sjh.do',{userId:row.userId},function(result){
+                        	
+                        //	console.log(result);
+                        	
                             if (result.success){
                                 $('#dg').datagrid('reload');    // reload the user data
+                                $.messager.show({    // show error message
+                                    title: '삭제성공',
+                                    msg: result.success
+                                });
                             } else {
                                 $.messager.show({    // show error message
                                     title: 'Error',
