@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anbtech.anbframe.entities.AnbUser;
@@ -36,6 +37,27 @@ public class UserController {
 		List list = service.selectUser(entity);
 
 		return list;
+	}
+	
+	
+	@RequestMapping(value="/home_sjh", method=RequestMethod.GET)
+	public String getSJH() throws Exception{
+		
+		return "test_sjh";
+	}
+	
+
+	@RequestMapping(value="/home_kys", method=RequestMethod.GET)
+	public String getKYS() throws Exception{
+		
+		return "test_kys";
+	}
+	
+	
+	@RequestMapping(value="/home_khj", method=RequestMethod.GET)
+	public String getKHJ() throws Exception{
+		
+		return "test_khj";
 	}
 	
 }
