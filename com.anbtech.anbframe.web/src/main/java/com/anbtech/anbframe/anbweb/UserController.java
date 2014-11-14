@@ -29,12 +29,10 @@ public class UserController {
 	private UserService service;
 	
 	@ResponseBody
-	@RequestMapping(value="/user_all", method=RequestMethod.GET)
+	@RequestMapping(value="/user_all", method=RequestMethod.POST)
 	public List getUserAll() throws Exception{
 
-		AnbUser entity = new AnbUser();
-		entity.setUserName("테스");
-		List list = service.selectUser(entity);
+		List list = service.selectUser(new AnbUser());
 
 		return list;
 	}
@@ -60,4 +58,25 @@ public class UserController {
 		return "test_khj";
 	}
 	
+	
+	@RequestMapping(value="/user_insert_sjh", method=RequestMethod.POST)
+	public void insertUserSJH(@RequestParam(value="userId") String userId,@RequestParam(value="userName") String userName,
+			@RequestParam(value="userGender") String userGender,@RequestParam(value="userBirth") String userBirth) throws Exception{
+	
+		LOG.info("{}", userId +" || "+userName+" || "+userGender+" || "+userBirth);
+		AnbUser vo = new AnbUser();
+		vo.setUserId(userId);
+		vo.setUserName(userName);
+		vo.setUserGender(userGender);
+		String birth = "19700101";
+		if(userBirth!=null){
+			birth = userBirth;
+		}
+		
+		vo.setUserBirth(null);
+		
+		service.saveOrUpdateUser(vo);
+		
+		
+	}
 }

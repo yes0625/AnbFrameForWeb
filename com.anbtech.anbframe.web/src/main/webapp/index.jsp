@@ -5,16 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>개발센터 웹어플리케이션</title>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath }/resources/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath }/resources/themes/icon.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath }/resources/themes/color.css">
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/resources/jquery.min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/resources/jquery.easyui.min.js"></script>
+<link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/resources/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/resources/themes/icon.css">
+<link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/resources/themes/color.css">
+<script type="text/javascript"	src="${pageContext.request.contextPath }/resources/jquery.min.js"></script>
+<script type="text/javascript"	src="${pageContext.request.contextPath }/resources/jquery.easyui.min.js"></script>
 
 <style>
 	#display_area {
