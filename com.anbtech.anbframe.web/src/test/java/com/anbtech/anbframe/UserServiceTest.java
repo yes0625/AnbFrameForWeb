@@ -56,6 +56,7 @@ public class UserServiceTest {
 			String userId = vo.getUserId();
 			if(userId.equals("anb")){
 				LOG.info("{}",userId);
+				LOG.info("{}",userId);
 			}
 		}
 	}
