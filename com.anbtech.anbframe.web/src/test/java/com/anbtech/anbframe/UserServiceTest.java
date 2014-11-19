@@ -52,6 +52,7 @@ public class UserServiceTest {
 		service.saveOrUpdateUser(eu);
 		// 이거 되는건가? 
 		// 두번째 커밋 테스트
+		// 세번째 커밋 테스트
 		List<AnbUser> list = service.selectUser(eu);
 		for(AnbUser vo : list){
 			String userId = vo.getUserId();
