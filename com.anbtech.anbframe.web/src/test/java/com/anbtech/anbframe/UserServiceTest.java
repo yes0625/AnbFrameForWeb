@@ -50,7 +50,7 @@ public class UserServiceTest {
 		eu.setUserId("anb");
 		eu.setUserName("에이앤비");
 		service.saveOrUpdateUser(eu);
-		
+		// 이거 되는건가? 
 		List<AnbUser> list = service.selectUser(eu);
 		for(AnbUser vo : list){
 			String userId = vo.getUserId();
