@@ -24,7 +24,8 @@ public class BasicTest {
 	@Test
 	public void testName() throws Exception {
 		String now = dao.getDbTimeNow();
-LOG.info("[현재시간은] : {}", now);		
+LOG.info("[현재시간은] : {}", now);
+LOG.info("[현재시간은 너무 늦었다!!!] : {}", now);
 		assertNotNull(now);
 	}
 	

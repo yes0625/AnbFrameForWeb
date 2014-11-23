@@ -1,5 +1,7 @@
 package com.anbtech.anbframe.anbweb;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -96,6 +98,75 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value="/user_delete_sjh", method=RequestMethod.POST)
 	public Map deleteUserSJH(@RequestParam(value="userId")String userId) {
+		Map<String,String> map = new HashMap<String,String>();
+		AnbUser vo = new AnbUser();
+		vo.setUserId(userId);
+		String msg = "";
+		String key = "";
+		try{
+			service.removeUser(vo);
+			msg = "성공적으로 삭제되었습니다.";
+			key = "success";
+		}catch(Exception e){
+			msg = e.getLocalizedMessage();
+			key = "error";
+		}
+		
+		map.put(key, msg);
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/user_insert_kys", method=RequestMethod.POST)
+	public Map insertUserKYS(@RequestParam(value="userId") String userId,@RequestParam(value="userName") String userName,
+			@RequestParam(value="userGender") String userGender,@RequestParam(value="userBirth") String userBirth) {
+	
+		Map<String,String> map = new HashMap<String,String>();
+		LOG.info("{}", userId +" || "+userName+" || "+userGender+" || "+userBirth);
+		AnbUser vo = new AnbUser();
+		vo.setUserId(userId);
+		vo.setUserName(userName);
+		vo.setUserGender(userGender);
+		
+//		String birth = "19700101";
+//		if(userBirth!=null){
+//			birth = userBirth;
+//		}
+//		vo.setUserBirth(null);
+		
+//변경 부분		
+		Date birth = null;
+		if(userBirth!=null){
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
+			try {
+				birth = transFormat.parse(userBirth);
+			} catch (ParseException e) {
+				map.put(e.getLocalizedMessage(), "error");
+				return map;
+			}
+		}
+		vo.setUserBirth(birth); //Date형태로 변경
+		
+		String msg = "";
+		String key = "";
+		try{
+			service.saveOrUpdateUser(vo);
+			msg = "성공적으로 등록되었습니다.";
+			key = "success";
+		}catch(Exception e){
+			msg = e.getLocalizedMessage();
+			key = "error";
+		}
+		
+		map.put(key, msg);
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/user_delete_kys", method=RequestMethod.POST)
+	public Map deleteUserKYS(@RequestParam(value="userId")String userId) {
 		Map<String,String> map = new HashMap<String,String>();
 		AnbUser vo = new AnbUser();
 		vo.setUserId(userId);
