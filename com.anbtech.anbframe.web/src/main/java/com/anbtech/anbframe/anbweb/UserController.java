@@ -44,6 +44,12 @@ public class UserController {
 		return "test_sjh";
 	}
 	
+	@RequestMapping(value="/alopex", method=RequestMethod.GET)
+	public String getalopex() throws Exception{
+		
+		return "alopex";
+	}
+	
 
 	@RequestMapping(value="/home_kys", method=RequestMethod.GET)
 	public String getKYS() throws Exception{

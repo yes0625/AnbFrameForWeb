@@ -4,12 +4,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>개발센터 웹어플리케이션</title>
+<link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/resources/foundation/css/normalize.css">
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/resources/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/resources/themes/icon.css">
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/resources/themes/color.css">
+
+
+
+
 <script type="text/javascript"	src="${pageContext.request.contextPath }/resources/jquery.min.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath }/resources/jquery.easyui.min.js"></script>
+<script type="text/javascript"	src="${pageContext.request.contextPath }/resources/foundation/js/vendor/modernizr.js"></script>
+<script type="text/javascript"	src="${pageContext.request.contextPath }/resources/foundation/js/foundation.min.js"></script>
 
 <style>
 	#display_area {
@@ -18,11 +26,13 @@
 </style>
 
 </head>
-<body>
+<body class="metro">
 
 	<div id="content">
 		<div style="margin: 20px 0"></div>
+		
 		<select id="cc" style="width: 150px"></select>
+		
 		<div id="sp">
 			<div style="color: #99BBE8; background: #fafafa; padding: 5px;">팀 선택</div>
 			<div style="padding: 10px">
@@ -31,13 +41,16 @@
 				<input type="radio" name="lang" value="khj"><span>권호진 과장 조</span><br />
 			</div>
 		</div>
-		<button id="find">조회</button>
+		<button id="find" class="small radius button">조회</button>
 	</div>
 
 <div id="display_area"></div>
 
 	<script type="text/javascript">
 		$(function() {
+			
+			$(document).foundation();
+			
 			$('#cc').combo({
 				required : true,
 				editable : false
