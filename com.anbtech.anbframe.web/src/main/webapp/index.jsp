@@ -93,5 +93,8 @@
 		});
 	</script>
 
+
+<a href="${pageContext.request.contextPath }/rank/manage_rank.do">직급관리</a>
+
 </body>
 </html>

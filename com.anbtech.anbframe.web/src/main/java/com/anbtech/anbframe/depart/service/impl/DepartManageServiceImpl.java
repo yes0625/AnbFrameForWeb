@@ -1,4 +1,4 @@
-package com.anbtech.anbframe.user.service.impl;
+package com.anbtech.anbframe.depart.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
