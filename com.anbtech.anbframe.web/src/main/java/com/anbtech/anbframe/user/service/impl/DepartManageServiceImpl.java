@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.anbtech.anbframe.anbweb.vo.DeptManageVo;
-import com.anbtech.anbframe.user.service.DepartManageDAOService;
-import com.anbtech.anbframe.user.service.DepartManageService;
+import com.anbtech.anbframe.depart.service.DepartManageDAOService;
+import com.anbtech.anbframe.depart.service.DepartManageService;
 
 /**
  * 부서 관리 모듈용 비즈단 구현체

@@ -9,7 +9,7 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Service;
 
 import com.anbtech.anbframe.anbweb.vo.DeptManageVo;
-import com.anbtech.anbframe.user.service.DepartManageDAOService;
+import com.anbtech.anbframe.depart.service.DepartManageDAOService;
 
 public class DepartManageDAOServiceImpl implements DepartManageDAOService{
 private static final String cR= "\n";
