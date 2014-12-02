@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.anbtech.anbframe.anbweb.vo.DeptManageVo;
+import com.anbtech.anbframe.anbweb.vo.DeptManageVO;
 import com.anbtech.anbframe.depart.service.DepartManageDAOService;
 import com.anbtech.anbframe.depart.service.DepartManageService;
 
@@ -22,9 +22,9 @@ public class DepartManageServiceImpl implements DepartManageService{
 
 	public <E, T> List<E> findDept(T entity) throws Exception {
 	
-		DeptManageVo vo = (DeptManageVo) entity;
+		DeptManageVO vo = (DeptManageVO) entity;
 		
-		List<DeptManageVo> list = new ArrayList<DeptManageVo>();
+		List<DeptManageVO> list = new ArrayList<DeptManageVO>();
 		
 		/*
 		 *  아래와 같이 비즈단에서 경우의 수별 해당 쿼리를 DAO_SERVICE에 작성하든지
@@ -42,7 +42,7 @@ public class DepartManageServiceImpl implements DepartManageService{
 		return (List<E>) list;
 	}
 	public <E, T> int insertDept(T entity) throws Exception {
-		DeptManageVo vo = (DeptManageVo) entity;
+		DeptManageVO vo = (DeptManageVO) entity;
 		
 		int insert = dao_service.saveDept(vo);
 		
@@ -51,7 +51,7 @@ public class DepartManageServiceImpl implements DepartManageService{
 	
 	public <E, T> int updateDept(T entity) throws Exception {
 		
-		DeptManageVo vo = (DeptManageVo) entity;
+		DeptManageVO vo = (DeptManageVO) entity;
 		
 		int update = dao_service.updateDept(vo);
 		
@@ -59,7 +59,7 @@ public class DepartManageServiceImpl implements DepartManageService{
 	}
 	
 	public <E, T> int deleteDept(T entity) throws Exception {
-		DeptManageVo vo = (DeptManageVo) entity;
+		DeptManageVO vo = (DeptManageVO) entity;
 		
 		int delete = dao_service.deleteDept(vo);
 		

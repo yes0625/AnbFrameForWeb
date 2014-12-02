@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.anbtech.anbframe.anbweb.vo.DeptManageVo;
+import com.anbtech.anbframe.anbweb.vo.DeptManageVO;
 import com.anbtech.anbframe.depart.service.DepartManageService;
 
 /**
@@ -33,8 +33,8 @@ public class DepartManageController {
 	@ResponseBody
 	@RequestMapping(value="/dept_find", method=RequestMethod.GET)
 	public List findDept(){
-		DeptManageVo entity = new DeptManageVo();
-		List<DeptManageVo> list = null;
+		DeptManageVO entity = new DeptManageVO();
+		List<DeptManageVO> list = null;
 		try {
 			list = service.findDept(entity);
 		} catch (Exception e) {
@@ -50,7 +50,7 @@ public class DepartManageController {
 	@RequestMapping(value="/dept_all", method=RequestMethod.POST)
 	public List getDeptAll() throws Exception{
 
-		List list = service.findDept(new DeptManageVo());
+		List list = service.findDept(new DeptManageVO());
 
 		return list;
 	}
@@ -62,7 +62,7 @@ public class DepartManageController {
 	
 		Map<String,String> map = new HashMap<String,String>();
 		LOG.info("{}", dept_name +" || "+dept_code);
-		DeptManageVo vo = new DeptManageVo();
+		DeptManageVO vo = new DeptManageVO();
 		vo.setDept_name(dept_name);
 		vo.setDept_code(dept_code);
 		
@@ -86,7 +86,7 @@ public class DepartManageController {
 	@RequestMapping(value="/dept_delete_khj", method=RequestMethod.POST)
 	public Map deleteDeptKHJ(@RequestParam(value="deptCode")String dept_code) {
 		Map<String,String> map = new HashMap<String,String>();
-		DeptManageVo vo = new DeptManageVo();
+		DeptManageVO vo = new DeptManageVO();
 		vo.setDept_code(dept_code);
 		String msg = "";
 		String key = "";

@@ -1,4 +1,4 @@
-package com.anbtech.anbframe.user.service.persist;
+package com.anbtech.anbframe.rank.service.impl;
 
 import static org.junit.Assert.*;
 
@@ -15,22 +15,22 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.anbtech.anbframe.entities.AnbRank;
-import com.anbtech.anbframe.rank.service.RankManageDAOService;
+import com.anbtech.anbframe.rank.service.RankManageService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(value="classpath*:/spring/context-*.xml")
 @TransactionConfiguration(defaultRollback=true)
 @Transactional
-public class RankManageDAOServiceImplTest {
+public class RankManageServiceImplTest {
 
-	private static final Logger LOG = LoggerFactory.getLogger(RankManageDAOServiceImplTest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(RankManageServiceImplTest.class);
 	
 	@Autowired
-	private RankManageDAOService service;
+	private RankManageService service;
 	
 	@Test
 	public void testR() throws Exception {
-		List list = service.getRankInfo(new AnbRank());
+		List list = service.selectRankInfo(new AnbRank());
 		assertNotNull(list);
 	}
 	

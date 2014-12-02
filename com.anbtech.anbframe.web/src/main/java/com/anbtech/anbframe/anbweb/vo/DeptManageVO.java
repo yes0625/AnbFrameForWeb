@@ -1,6 +1,6 @@
 package com.anbtech.anbframe.anbweb.vo;
 
-public class DeptManageVo {
+public class DeptManageVO {
 	String dept_name, dept_code, reg_date, reg_user, update_date,update_user;
 
 	public String getDept_name() {
