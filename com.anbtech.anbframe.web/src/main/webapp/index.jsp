@@ -11,9 +11,6 @@
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/resources/themes/icon.css">
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/resources/themes/color.css">
 
-
-
-
 <script type="text/javascript"	src="${pageContext.request.contextPath }/resources/jquery.min.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath }/resources/jquery.easyui.min.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath }/resources/foundation/js/vendor/modernizr.js"></script>
