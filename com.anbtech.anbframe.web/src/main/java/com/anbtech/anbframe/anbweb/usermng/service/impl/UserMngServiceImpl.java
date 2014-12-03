@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.anbtech.anbframe.UserServiceTest;
 import com.anbtech.anbframe.anbweb.usermng.dao.UserMngDAO;
 import com.anbtech.anbframe.anbweb.usermng.service.UserMngService;
 import com.anbtech.anbframe.anbweb.usermng.vo.UserMngVO;
