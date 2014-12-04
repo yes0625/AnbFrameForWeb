@@ -31,9 +31,6 @@ public class UserMngController {
 	UserMngService userMngService;
 	
 	
-	
-	
-	
 	@RequestMapping(value = "/usermng/userMng", method = RequestMethod.GET)
 	public String userMng(Locale locale, Model model) {
 		logger.info("/usermng/userMng");
@@ -49,6 +46,15 @@ public class UserMngController {
 	public List getListUser(@ModelAttribute UserMngVO param) {
 		logger.info("/usermng/userMng");
 		return userMngService.getListUser(param);
+	}
+	
+	
+	@RequestMapping(value = "/userMng/editUser", method = RequestMethod.POST)
+	public void editUser(@ModelAttribute UserMngVO param) {
+		
+		
+		
+
 	}
 	
 }
