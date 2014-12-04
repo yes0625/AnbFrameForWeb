@@ -1,5 +1,6 @@
 package com.anbtech.anbframe.anbweb;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -7,10 +8,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anbtech.anbframe.entities.AnbEmployee;
@@ -20,6 +24,8 @@ import com.anbtech.anbframe.rank.service.RankManageService;
 @Controller
 @RequestMapping(value="/rank")
 public class RankManageController {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(RankManageController.class);
 
 	@Autowired
 	private RankManageService service;
@@ -51,7 +57,7 @@ public class RankManageController {
 	*/
 	@ResponseBody
 	@RequestMapping(value="/rank_list", method=RequestMethod.GET)
-	public Map selectRankInfo(){
+	public Map selectRankInfo(@RequestParam(required=false,value="name") String name){
 		
 		Map<String,Object> map = new HashMap<String,Object>();
 		
@@ -62,7 +68,16 @@ public class RankManageController {
 		List<AnbRank> list = new ArrayList<AnbRank>();
 		
 		try {
-			list = service.selectRankInfo(new AnbRank());
+			AnbRank pojo = new AnbRank();
+			
+			if(name!=null){
+				
+				String ko_name = new String(name.getBytes("8859_1"), "UTF-8");
+				LOG.info("[넘어온 직급명] : {}, 변환된 직급명 : {}", name, ko_name);
+				pojo.setRankName(ko_name);
+			}
+			
+			list = service.selectRankInfo(pojo);
 			
 			for(AnbRank vo : list){
 				vo.setAnbEmployees(null);
