@@ -48,4 +48,13 @@ public class UserMngController {
 		return userMngService.getListUser(param);
 	}
 	
+	
+	@RequestMapping(value = "/userMng/editUser", method = RequestMethod.POST)
+	public void editUser(@ModelAttribute UserMngVO param) {
+		
+		
+		
+
+	}
+	
 }
