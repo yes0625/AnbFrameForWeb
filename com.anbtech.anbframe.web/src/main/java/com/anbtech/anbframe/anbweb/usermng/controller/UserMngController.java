@@ -31,6 +31,9 @@ public class UserMngController {
 	UserMngService userMngService;
 	
 	
+	
+	
+	
 	@RequestMapping(value = "/usermng/userMng", method = RequestMethod.GET)
 	public String userMng(Locale locale, Model model) {
 		logger.info("/usermng/userMng");
