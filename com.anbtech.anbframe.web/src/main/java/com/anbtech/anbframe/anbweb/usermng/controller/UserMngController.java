@@ -20,6 +20,7 @@ import com.anbtech.anbframe.anbweb.usermng.vo.UserMngVO;
  * Handles requests for the application home page.
  */
 @Controller
+@RequestMapping(value="/usermng")
 public class UserMngController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserMngController.class);
@@ -31,7 +32,7 @@ public class UserMngController {
 	UserMngService userMngService;
 	
 	
-	@RequestMapping(value = "/usermng/userMng", method = RequestMethod.GET)
+	@RequestMapping(value = "/userMng", method = RequestMethod.GET)
 	public String userMng(Locale locale, Model model) {
 		logger.info("/usermng/userMng");
 		
@@ -42,14 +43,14 @@ public class UserMngController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/userMng/getListUser", method = RequestMethod.POST)
+	@RequestMapping(value = "/getListUser", method = RequestMethod.POST)
 	public List getListUser(@ModelAttribute UserMngVO param) {
 		logger.info("/usermng/userMng");
 		return userMngService.getListUser(param);
 	}
 	
 	
-	@RequestMapping(value = "/userMng/editUser", method = RequestMethod.POST)
+	@RequestMapping(value = "/editUser", method = RequestMethod.POST)
 	public void editUser(@ModelAttribute UserMngVO param) {
 		
 		

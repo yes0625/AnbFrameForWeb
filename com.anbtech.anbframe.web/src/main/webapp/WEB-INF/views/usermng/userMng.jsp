@@ -26,7 +26,7 @@
 	  </div>
 	  <div>
 		  <table id="dg" title="직원목록" class="easyui-datagrid" style="width:100%; height:250px"
-		            url="${pageContext.request.contextPath }/userMng/getListUser.do"
+		            url="${pageContext.request.contextPath }/usermng/getListUser.do"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true">
 		        <thead>
@@ -96,7 +96,7 @@
                 $('#dlg').dialog('open').dialog('setTitle','Edit User');
                 $('#fm').form('load',row);
                 
-                url = '${pageContext.request.contextPath }/userMng/editUser.do';
+                url = '${pageContext.request.contextPath }/usermng/editUser.do';
             }else{
             	$.messager.alert('','수정할 row 를 선택하세요.','info');
             }
