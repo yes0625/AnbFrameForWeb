@@ -1,13 +1,17 @@
 package com.anbtech.anbframe.anbweb;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +26,6 @@ import com.anbtech.anbframe.depart.service.DepartManageService;
  * @modify : 수정자는 이 코멘트에 자신의 이름작성할것 (다수)
  */
 @Controller
-@RequestMapping(value="/dept")
 public class DepartManageController {
 
 	private static final Logger LOG = LoggerFactory.getLogger(DepartManageController.class);
@@ -30,32 +33,32 @@ public class DepartManageController {
 	@Autowired
 	private DepartManageService service;
 	
-	@ResponseBody
-	@RequestMapping(value="/dept_find", method=RequestMethod.GET)
-	public List findDept(){
-		DeptManageVO entity = new DeptManageVO();
-		List<DeptManageVO> list = null;
-		try {
-			list = service.findDept(entity);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
+	@RequestMapping(value = "/department/departList", method = RequestMethod.GET)
+	public String userMng(Locale locale, Model model) {
 		
-		return list;
+		DeptManageVO param = new DeptManageVO();
+		//model.addAttribute("list", userMngService.getListUser(param).size());
+		
+		return "/department/departList";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/departList/getDeptList", method = RequestMethod.POST)
+	public List getDeptList(@ModelAttribute DeptManageVO param) {
+		return service.getDeptList(param);
+	}
 	
 	@ResponseBody
 	@RequestMapping(value="/dept_all", method=RequestMethod.POST)
 	public List getDeptAll() throws Exception{
 
-		List list = service.findDept(new DeptManageVO());
+		List list = service.getDeptList(new DeptManageVO());
 
 		return list;
 	}
 	
-	@ResponseBody
+	/*@ResponseBody
 	@RequestMapping(value="/dept_insert_khj", method=RequestMethod.POST)
 	public Map insertDeptKHJ(@RequestParam(value="deptName") String dept_name,
 			@RequestParam(value="deptCode") String dept_code) {
@@ -102,5 +105,5 @@ public class DepartManageController {
 		map.put(key, msg);
 		
 		return map;
-	}
+	}*/
 }

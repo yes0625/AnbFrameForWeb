@@ -1,7 +1,15 @@
 package com.anbtech.anbframe.anbweb.vo;
 
 public class DeptManageVO {
-	String dept_name, dept_code, reg_date, reg_user, update_date,update_user;
+	String dept_name, dept_code, reg_date, reg_user, update_date,update_user,dept_parnt;
+
+	public String getDept_parnt() {
+		return dept_parnt;
+	}
+
+	public void setDept_parnt(String dept_parnt) {
+		this.dept_parnt = dept_parnt;
+	}
 
 	public String getDept_name() {
 		return dept_name;
