@@ -30,7 +30,7 @@ public class DepartManageServiceImplTest {
 	
 	@Test
 	public void testR() throws Exception {
-		List list = service.findDept(new DeptManageVO());
+		List list = service.getDeptList(new DeptManageVO());
 		assertNotNull(list);
 	}
 	

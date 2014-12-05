@@ -33,6 +33,7 @@
 
 
 <a href="${pageContext.request.contextPath }/usermng/userMng.do">직원관리</a>
-
+<a href="${pageContext.request.contextPath }/usermng/userMng.do">직원관리</a>
+<a href="${pageContext.request.contextPath }/department/departList.do">부서관리</a>
 </body>
 </html>
