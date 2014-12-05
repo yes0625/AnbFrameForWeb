@@ -25,4 +25,13 @@ public class DepartManageServiceImpl implements DepartManageService{
 	public List getDeptList(DeptManageVO param){
 		return dao_service.getDeptList(param);
 	}
+	public void dept_insert(String div_name,String div_code,String div_parent){
+		dao_service.dept_insert(div_name,div_code,div_parent);
+	}
+	public void dept_update(String div_name,String div_code,String div_parent,String old_code){
+		dao_service.dept_update(div_name,div_code,div_parent,old_code);
+	}
+	public void dept_delete(String div_code){
+		dao_service.dept_delete(div_code);
+	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.junit.runner.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ import com.anbtech.anbframe.depart.service.DepartManageService;
 @Controller
 public class DepartManageController {
 
-	private static final Logger LOG = LoggerFactory.getLogger(DepartManageController.class);
+	private static final Logger logger = LoggerFactory.getLogger(DepartManageController.class);
 	
 	@Autowired
 	private DepartManageService service;
@@ -37,7 +38,7 @@ public class DepartManageController {
 	@RequestMapping(value = "/department/departList", method = RequestMethod.GET)
 	public String userMng(Locale locale, Model model) {
 		
-		DeptManageVO param = new DeptManageVO();
+		//DeptManageVO param = new DeptManageVO();
 		//model.addAttribute("list", userMngService.getListUser(param).size());
 		
 		return "/department/departList";
@@ -58,52 +59,23 @@ public class DepartManageController {
 		return list;
 	}
 	
-	/*@ResponseBody
-	@RequestMapping(value="/dept_insert_khj", method=RequestMethod.POST)
-	public Map insertDeptKHJ(@RequestParam(value="deptName") String dept_name,
-			@RequestParam(value="deptCode") String dept_code) {
-	
-		Map<String,String> map = new HashMap<String,String>();
-		LOG.info("{}", dept_name +" || "+dept_code);
-		DeptManageVO vo = new DeptManageVO();
-		vo.setDept_name(dept_name);
-		vo.setDept_code(dept_code);
-		
-		String msg = "";
-		String key = "";
-		try{
-			service.insertDept(vo);
-			msg = "성공적으로 등록되었습니다.";
-			key = "success";
-		}catch(Exception e){
-			msg = e.getLocalizedMessage();
-			key = "error";
-		}
-		
-		map.put(key, msg);
-		
-		return map;
+	@ResponseBody
+	@RequestMapping(value="/departList/dept_save", method=RequestMethod.POST)
+	public void saveDept(String div_name,String div_code, String div_parent) throws Exception{
+		 service.dept_insert(div_name,div_code,div_parent);
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/dept_delete_khj", method=RequestMethod.POST)
-	public Map deleteDeptKHJ(@RequestParam(value="deptCode")String dept_code) {
-		Map<String,String> map = new HashMap<String,String>();
-		DeptManageVO vo = new DeptManageVO();
-		vo.setDept_code(dept_code);
-		String msg = "";
-		String key = "";
-		try{
-			service.deleteDept(vo);
-			msg = "성공적으로 삭제되었습니다.";
-			key = "success";
-		}catch(Exception e){
-			msg = e.getLocalizedMessage();
-			key = "error";
-		}
-		
-		map.put(key, msg);
-		
-		return map;
-	}*/
+	@RequestMapping(value="/departList/dept_update", method=RequestMethod.POST)
+	public void updateDept(@RequestParam(required=false,value="old_code") String old_code,String div_name,String div_code, String div_parent) throws Exception{
+		service.dept_update(div_name,div_code,div_parent,old_code);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/departList/dept_delete", method=RequestMethod.POST)
+	public void deleteDept(@RequestParam(required=false,value="div_code") String div_code)  throws Exception{
+		logger.info(">> :"+div_code);
+		service.dept_delete(div_code);
+	}
+	
 }

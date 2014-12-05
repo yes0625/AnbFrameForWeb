@@ -11,4 +11,8 @@ import com.anbtech.anbframe.anbweb.vo.DeptManageVO;
  */
 public interface DepartManageDAOService {
 	public List getDeptList(DeptManageVO param);
+	
+	public void dept_insert(String div_name,String div_code,String div_parent);
+	public void dept_update(String div_name,String div_code,String div_parent,String old_code);
+	public void dept_delete(String div_code);
 }
