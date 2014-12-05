@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/css/Mng/userMng.css">
 <script type="text/javascript"	src="${pageContext.request.contextPath }/resources/jquery.min.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath }/resources/jquery.easyui.min.js"></script>
+<script type="text/javascript"	src="${pageContext.request.contextPath }/resources/common/common.js"></script>
 <head>
 	<title>직원관리</title>
 </head>
@@ -103,30 +104,16 @@
         }
         
         function saveUser(){
-            $('#fm').form('submit',{
-                url: '${pageContext.request.contextPath }/usermng/insertUser.do',
-                onSubmit: function(){
-                    return $(this).form('validate');
-                },
-                success: function(result){
-                    var result = eval('('+result+')');
-                    if (result.errorMsg){
-                        $.messager.show({
-                            title: 'Error',
-                            msg: result.errorMsg
-                        });
-                    } else {
-                    	if(result.duplication == "Y"){
-                    		  $.messager.show({
-                                  title: '아이디중복',
-                                  msg: '중복되는 아이디 입니다.'
-                              });            		
-                    	}else{
-	                        $('#dlg').dialog('close');        // close the dialog
-    	                    $('#dg').datagrid('reload');    // reload the user data
-                    	}
-                    }
-                }
+        	common.formSubmit('fm','${pageContext.request.contextPath }/usermng/insertUser.do',function(result){
+            	if(result.duplication == "Y"){
+                $.messager.show({
+                	title: '아이디중복',
+                    msg: '중복되는 아이디 입니다.'
+                               });            		
+               	}else{
+	                $('#dlg').dialog('close');        // close the dialog
+    	            $('#dg').datagrid('reload');    // reload the user data
+               	}            	
             });
         }
         
