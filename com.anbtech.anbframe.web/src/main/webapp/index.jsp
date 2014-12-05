@@ -32,6 +32,7 @@
 
 
 
+<a href="${pageContext.request.contextPath }/usermng/userMng.do">직원관리</a>
 
 </body>
 </html>
