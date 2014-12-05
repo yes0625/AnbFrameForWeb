@@ -37,7 +37,7 @@ public class DepartManageController {
 	@RequestMapping(value = "/department/departList", method = RequestMethod.GET)
 	public String userMng(Locale locale, Model model) {
 		
-		DeptManageVO param = new DeptManageVO();
+		//DeptManageVO param = new DeptManageVO();
 		//model.addAttribute("list", userMngService.getListUser(param).size());
 		
 		return "/department/departList";
