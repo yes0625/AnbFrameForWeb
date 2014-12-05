@@ -23,16 +23,20 @@ private static final Logger LOG = LoggerFactory.getLogger(UserMngServiceImpl.cla
 		return userMngDAO.getListUser(param);
 	}
 	
-	public int updateUser(UserMngVO param) throws Exception{
+	synchronized public int updateUser(UserMngVO param) throws Exception{
 		return userMngDAO.updateUser(param);
 	}
 	
-	public int deleteUser(UserMngVO param) throws Exception{
+	synchronized public int deleteUser(UserMngVO param) throws Exception{
 		return userMngDAO.deleteUser(param);
 	}
 	
-	public void inserUser(UserMngVO param) throws Exception{
+	synchronized public void inserUser(UserMngVO param) throws Exception{
 		userMngDAO.insertUser(param);
+	}
+	
+	public int checkDuplicationId(UserMngVO param) throws Exception{
+		return userMngDAO.checkDuplicationId(param);
 	}
 
 }

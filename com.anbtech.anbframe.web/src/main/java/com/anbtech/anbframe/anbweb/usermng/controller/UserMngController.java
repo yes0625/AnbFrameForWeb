@@ -35,16 +35,23 @@ public class UserMngController {
 	UserMngService userMngService;
 	
 	
+	/**
+	 * 직원관리 메인
+	 * @param locale
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/userMng", method = RequestMethod.GET)
 	public String userMng(Locale locale, Model model) {
 		logger.info("/usermng/userMng");
-		
-		UserMngVO param = new UserMngVO();
-		//model.addAttribute("list", userMngService.getListUser(param).size());
-		
 		return "/usermng/userMng";
 	}
 	
+	/**
+	 * 직원 조회
+	 * @param param
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/getListUser", method = RequestMethod.POST)
 	public List getListUser(@ModelAttribute UserMngVO param) {
@@ -71,13 +78,24 @@ public class UserMngController {
 
 	}
 	
+	/**
+	 * 직원 추가
+	 * @param param
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/insertUser", method = RequestMethod.POST)
 	public Map insertUser(@ModelAttribute UserMngVO param) {
 		logger.info("/usermng/insertUser");
 		Map result = new HashMap();
 		try {
-			userMngService.inserUser(param);
+			int cnt  = userMngService.checkDuplicationId(param);
+			if(cnt > 0)
+				result.put("duplication", "Y");
+			else{
+				userMngService.inserUser(param);
+				result.put("duplication", "N");
+			}
 			result.put("result", "success");
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -86,5 +104,6 @@ public class UserMngController {
 		}
 		return result;
 	}
+	
 	
 }

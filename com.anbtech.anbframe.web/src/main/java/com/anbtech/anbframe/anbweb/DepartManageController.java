@@ -1,13 +1,18 @@
 package com.anbtech.anbframe.anbweb;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
+import org.junit.runner.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,85 +27,55 @@ import com.anbtech.anbframe.depart.service.DepartManageService;
  * @modify : 수정자는 이 코멘트에 자신의 이름작성할것 (다수)
  */
 @Controller
-@RequestMapping(value="/dept")
 public class DepartManageController {
 
-	private static final Logger LOG = LoggerFactory.getLogger(DepartManageController.class);
+	private static final Logger logger = LoggerFactory.getLogger(DepartManageController.class);
 	
 	@Autowired
 	private DepartManageService service;
 	
-	@ResponseBody
-	@RequestMapping(value="/dept_find", method=RequestMethod.GET)
-	public List findDept(){
-		DeptManageVO entity = new DeptManageVO();
-		List<DeptManageVO> list = null;
-		try {
-			list = service.findDept(entity);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
+	@RequestMapping(value = "/department/departList", method = RequestMethod.GET)
+	public String userMng(Locale locale, Model model) {
 		
-		return list;
+		//DeptManageVO param = new DeptManageVO();
+		//model.addAttribute("list", userMngService.getListUser(param).size());
+		
+		return "/department/departList";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/departList/getDeptList", method = RequestMethod.POST)
+	public List getDeptList(@ModelAttribute DeptManageVO param) {
+		return service.getDeptList(param);
+	}
 	
 	@ResponseBody
 	@RequestMapping(value="/dept_all", method=RequestMethod.POST)
 	public List getDeptAll() throws Exception{
 
-		List list = service.findDept(new DeptManageVO());
+		List list = service.getDeptList(new DeptManageVO());
 
 		return list;
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/dept_insert_khj", method=RequestMethod.POST)
-	public Map insertDeptKHJ(@RequestParam(value="deptName") String dept_name,
-			@RequestParam(value="deptCode") String dept_code) {
-	
-		Map<String,String> map = new HashMap<String,String>();
-		LOG.info("{}", dept_name +" || "+dept_code);
-		DeptManageVO vo = new DeptManageVO();
-		vo.setDept_name(dept_name);
-		vo.setDept_code(dept_code);
-		
-		String msg = "";
-		String key = "";
-		try{
-			service.insertDept(vo);
-			msg = "성공적으로 등록되었습니다.";
-			key = "success";
-		}catch(Exception e){
-			msg = e.getLocalizedMessage();
-			key = "error";
-		}
-		
-		map.put(key, msg);
-		
-		return map;
+	@RequestMapping(value="/departList/dept_save", method=RequestMethod.POST)
+	public void saveDept(String div_name,String div_code, String div_parent) throws Exception{
+		 service.dept_insert(div_name,div_code,div_parent);
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/dept_delete_khj", method=RequestMethod.POST)
-	public Map deleteDeptKHJ(@RequestParam(value="deptCode")String dept_code) {
-		Map<String,String> map = new HashMap<String,String>();
-		DeptManageVO vo = new DeptManageVO();
-		vo.setDept_code(dept_code);
-		String msg = "";
-		String key = "";
-		try{
-			service.deleteDept(vo);
-			msg = "성공적으로 삭제되었습니다.";
-			key = "success";
-		}catch(Exception e){
-			msg = e.getLocalizedMessage();
-			key = "error";
-		}
-		
-		map.put(key, msg);
-		
-		return map;
+	@RequestMapping(value="/departList/dept_update", method=RequestMethod.POST)
+	public void updateDept(@RequestParam(required=false,value="old_code") String old_code,String div_name,String div_code, String div_parent) throws Exception{
+		service.dept_update(div_name,div_code,div_parent,old_code);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/departList/dept_delete", method=RequestMethod.POST)
+	public void deleteDept(@RequestParam(required=false,value="div_code") String div_code)  throws Exception{
+		logger.info(">> :"+div_code);
+		service.dept_delete(div_code);
+	}
+	
 }

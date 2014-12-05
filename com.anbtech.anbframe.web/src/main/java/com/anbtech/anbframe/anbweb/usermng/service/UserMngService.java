@@ -16,4 +16,6 @@ public interface UserMngService {
 	
 	public void inserUser(UserMngVO param) throws Exception;
 
+	public int checkDuplicationId(UserMngVO param) throws Exception;
+
 }
