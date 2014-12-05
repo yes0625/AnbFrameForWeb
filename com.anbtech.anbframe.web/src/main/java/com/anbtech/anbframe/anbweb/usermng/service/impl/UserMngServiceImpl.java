@@ -19,19 +19,19 @@ private static final Logger LOG = LoggerFactory.getLogger(UserMngServiceImpl.cla
 	@Autowired
 	private UserMngDAO userMngDAO;
 	
-	public List getListUser(UserMngVO param){
+	public List getListUser(UserMngVO param) throws Exception{
 		return userMngDAO.getListUser(param);
 	}
 	
-	public int updateUser(UserMngVO param){
+	public int updateUser(UserMngVO param) throws Exception{
 		return userMngDAO.updateUser(param);
 	}
 	
-	public int deleteUser(UserMngVO param){
+	public int deleteUser(UserMngVO param) throws Exception{
 		return userMngDAO.deleteUser(param);
 	}
 	
-	public void inserUser(UserMngVO param){
+	public void inserUser(UserMngVO param) throws Exception{
 		userMngDAO.insertUser(param);
 	}
 

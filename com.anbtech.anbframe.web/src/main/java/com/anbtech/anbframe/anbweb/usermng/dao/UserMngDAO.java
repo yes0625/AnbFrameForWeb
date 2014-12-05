@@ -63,8 +63,45 @@ public class UserMngDAO {
 	 *  
 	 * @return N/A
 	 */
-	public void insertUser(UserMngVO param){
-		
+	public void insertUser(UserMngVO param) throws Exception{
+			String sql = "INSERT INTO ANB_EMPLOYEE (EMP_ID, ANB_USER_USER_ID, ANB_RANK_RANK_CODE, ANB_DIV_DIV_CODE, ANB_PRIVILEGE_PRI_CODE, EMP_NAME, EMP_EMAIL, EMP_NAME_ENG, EMP_PHONE, EMP_HANDPHONE, EMP_ADDRESS, IN_DATE, MAR_DATE, POST_CODE, MAR_YN, CAR_YN, EMP_TYPE) "
+					+ "VALUES (? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? ,  ? , ? , ? , ? , ?) ";
+			jdbcTemplate.update(sql, new Object[] { 
+				getEmpId(),
+				param.getAnbUserUserId(),
+				param.getAnbRankRankCode(),       
+				param.getAnbDivDivCode(),         
+				param.getAnbPrivilegePriCode(),   
+				param.getEmpName(),               
+				param.getEmpEmail(),              
+				param.getEmpNameEng(),            
+				param.getEmpPhone(),              
+				param.getEmpHandphone(),          
+				param.getEmpAddress(),            
+				param.getInDate(),                
+				param.getMarDate(),               
+				param.getPostCode(),              
+				param.getMarYn(),                 
+				param.getCarYn(),                 
+				param.getEmpType()});               
+				
+	}
+	
+	
+	/**
+	 * 신규 사번 생성
+	 * @return
+	 */
+	public String getEmpId(){
+		String sql = "select 'A'||LPAD(TO_NUMBER(SUBSTR(max(emp_id),2,5)) + 1,5,'0')"
+				+"from ANB_EMPLOYEE";
+		String empId = "";
+		try {
+			empId = (String) this.jdbcTemplate.queryForObject(sql, String.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return empId;
 	}
 	
 }

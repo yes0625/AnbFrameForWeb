@@ -1,7 +1,10 @@
 package com.anbtech.anbframe.anbweb.usermng.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,16 +49,42 @@ public class UserMngController {
 	@RequestMapping(value = "/getListUser", method = RequestMethod.POST)
 	public List getListUser(@ModelAttribute UserMngVO param) {
 		logger.info("/usermng/userMng");
-		return userMngService.getListUser(param);
+		List list = new ArrayList();
+		try {
+			list = userMngService.getListUser(param);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 	
 	@RequestMapping(value = "/editUser", method = RequestMethod.POST)
 	public void editUser(@ModelAttribute UserMngVO param) {
 		
-		
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/insertUser", method = RequestMethod.POST)
+	public Map insertUser(@ModelAttribute UserMngVO param) {
+		logger.info("/usermng/insertUser");
+		Map result = new HashMap();
+		try {
+			userMngService.inserUser(param);
+			result.put("result", "success");
+		} catch (Exception e) {
+			// TODO: handle exception
+			result.put("errorMsg", "직원 등록 중 오류 발생..");
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
 }

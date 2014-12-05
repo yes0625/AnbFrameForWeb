@@ -53,7 +53,7 @@
         <form id="fm" method="post" novalidate>
             <div class="fitem">
                 <label>사용자 아이디</label>
-                <input name="empId" class="easyui-textbox" required="true">
+                <input name="anbUserUserId" class="easyui-textbox" required="true">
             </div>
             <div class="fitem">
                 <label>사용자이름</label>
@@ -104,7 +104,7 @@
         
         function saveUser(){
             $('#fm').form('submit',{
-                url: url,
+                url: '${pageContext.request.contextPath }/usermng/insertUser.do',
                 onSubmit: function(){
                     return $(this).form('validate');
                 },
