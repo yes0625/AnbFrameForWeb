@@ -28,12 +28,8 @@
 <ul>
 	<li><a href="${pageContext.request.contextPath }/usermng/userMng.do">직원관리</a></li>
 	<li><a href="${pageContext.request.contextPath }/rank/manage_rank.do">직급관리</a></li>
+	<li><a href="${pageContext.request.contextPath }/department/departList.do">부서관리</a></li>
 </ul>
 
-
-
-<a href="${pageContext.request.contextPath }/usermng/userMng.do">직원관리</a>
-<a href="${pageContext.request.contextPath }/usermng/userMng.do">직원관리</a>
-<a href="${pageContext.request.contextPath }/department/departList.do">부서관리</a>
 </body>
 </html>
