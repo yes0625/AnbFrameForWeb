@@ -34,4 +34,17 @@ public class DepartManageDAOServiceImplTest {
 		assertNotNull(list);
 	}
 	
+	@Test
+	public void testU() throws Exception {
+		// 테스트코드 되는건가? 2014-12-06
+		
+		DeptManageVO param = new DeptManageVO();
+		
+		param.setDiv_code("aaaaa");
+		param.setDiv_name("aaaaa");
+		param.setDiv_parent("aaaaa");
+		param.setDiv_code_old("9999");
+		
+		service.updateDiv(param);
+	}	
 }
