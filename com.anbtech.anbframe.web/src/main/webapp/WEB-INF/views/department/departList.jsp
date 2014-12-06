@@ -15,7 +15,7 @@
 <body>
    <h2>부서 관리</h2>
    
-   <table id="dg" title="My Users" class="easyui-datagrid" style="width:700px;height:250px"
+   <table id="dg" title="Department List" class="easyui-datagrid" style="width:700px;height:250px"
            url="${pageContext.request.contextPath }/departList/getDeptList.do"
            toolbar="#toolbar" pagination="true"
            rownumbers="true" fitColumns="true" singleSelect="true">
@@ -28,14 +28,14 @@
        </thead>
    </table>
    <div id="toolbar">
-       <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">부서 추가</a>
+       <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newDept()">부서 추가</a>
        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editDept()">부서 수정</a>
        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteDept($('#div_code'))">부서 삭제</a>
    </div>
    
    <div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
            closed="true" buttons="#dlg-buttons">
-       <div class="ftitle">User Information</div>
+       <div class="ftitle">Department Information</div>
        <form id="fm" method="post" novalidate>
            <div class="fitem">
                <label>부서 명 :</label>
@@ -57,15 +57,15 @@
    </div>
    <script type="text/javascript">
        var url;
-       function newUser(){
-           $('#dlg').dialog('open').dialog('setTitle','New User');
+       function newDept(){
+           $('#dlg').dialog('open').dialog('setTitle','New Department');
            $('#fm').form('clear');
            url = '${pageContext.request.contextPath}/departList/dept_save.do';
        }
        function editDept(){
            var row = $('#dg').datagrid('getSelected');
            if (row){
-               $('#dlg').dialog('open').dialog('setTitle','Edit User');
+               $('#dlg').dialog('open').dialog('setTitle','Edit Department');
                $('#fm').form('load',row);
                var old_code = $('#div_code').val();
                url = '${pageContext.request.contextPath}/departList/dept_update.do?old_code='+old_code;
