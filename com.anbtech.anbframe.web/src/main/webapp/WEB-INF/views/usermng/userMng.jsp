@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/css/Mng/userMng.css">
 <script type="text/javascript"	src="${pageContext.request.contextPath }/resources/jquery.min.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath }/resources/jquery.easyui.min.js"></script>
+<script type="text/javascript"	src="${pageContext.request.contextPath }/resources/common/common.js"></script>
 <head>
 	<title>직원관리</title>
 </head>
@@ -31,7 +32,7 @@
 		            rownumbers="true" fitColumns="true" singleSelect="true">
 		        <thead>
 		            <tr>
-		            	<th field="empId" width="50">사용자 아이디</th>
+		            	<th field="anbUserUserId" width="50">사용자 아이디</th>
 		            	<th field="empName" width="50">사용자이름</th>
 		                <th field="empEmail" width="50">이메일</th>               
 		                <th field="empPhone" width="50">전화번호</th>
@@ -47,13 +48,13 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">Remove User</a>
     </div>
     
-     <div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
-            closed="true" buttons="#dlg-buttons">
+     <div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
+     <input type="hidden" id="idchk_commit" />
         <div class="ftitle">User Information</div>
         <form id="fm" method="post" novalidate>
             <div class="fitem">
                 <label>사용자 아이디</label>
-                <input name="empId" class="easyui-textbox" required="true">
+                <input id="anbUserUserId" name="anbUserUserId" class="easyui-textbox" required="true" maxlength="20">
             </div>
             <div class="fitem">
                 <label>사용자이름</label>
@@ -103,23 +104,16 @@
         }
         
         function saveUser(){
-            $('#fm').form('submit',{
-                url: url,
-                onSubmit: function(){
-                    return $(this).form('validate');
-                },
-                success: function(result){
-                    var result = eval('('+result+')');
-                    if (result.errorMsg){
-                        $.messager.show({
-                            title: 'Error',
-                            msg: result.errorMsg
-                        });
-                    } else {
-                        $('#dlg').dialog('close');        // close the dialog
-                        $('#dg').datagrid('reload');    // reload the user data
-                    }
-                }
+        	common.formSubmit('fm','${pageContext.request.contextPath }/usermng/insertUser.do',function(result){
+            	if(result.duplication == "Y"){
+                $.messager.show({
+                	title: '아이디중복',
+                    msg: '중복되는 아이디 입니다.'
+                               });            		
+               	}else{
+	                $('#dlg').dialog('close');        // close the dialog
+    	            $('#dg').datagrid('reload');    // reload the user data
+               	}            	
             });
         }
         
@@ -144,4 +138,5 @@
             	$.messager.alert('','삭제할 row 를 선택하세요.','info');
             }
         }
+        
     </script>

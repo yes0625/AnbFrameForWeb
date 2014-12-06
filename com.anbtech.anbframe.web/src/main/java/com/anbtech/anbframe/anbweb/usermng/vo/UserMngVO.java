@@ -3,6 +3,10 @@ package com.anbtech.anbframe.anbweb.usermng.vo;
 public class UserMngVO {
 	
  private String empId;
+ private String anbUserUserId;
+ private String anbRankRankCode;
+ private String anbDivDivCode;
+ private String anbPrivilegePriCode;
  private String empName;
  private String empEmail;
  private String empNameEng;
@@ -15,12 +19,38 @@ public class UserMngVO {
  private String marYn;
  private String carYn;
  private String empType;
+
  
+public String getAnbRankRankCode() {
+	return anbRankRankCode;
+}
+public void setAnbRankRankCode(String anbRankRankCode) {
+	this.anbRankRankCode = anbRankRankCode;
+}
+public String getAnbDivDivCode() {
+	return anbDivDivCode;
+}
+public void setAnbDivDivCode(String anbDivDivCode) {
+	this.anbDivDivCode = anbDivDivCode;
+}
+public String getAnbPrivilegePriCode() {
+	return anbPrivilegePriCode;
+}
+public void setAnbPrivilegePriCode(String anbPrivilegePriCode) {
+	this.anbPrivilegePriCode = anbPrivilegePriCode;
+}
 public String getEmpId() {
 	return empId;
 }
 public void setEmpId(String empId) {
 	this.empId = empId;
+}
+
+public String getAnbUserUserId() {
+	return anbUserUserId;
+}
+public void setAnbUserUserId(String anbUserUserId) {
+	this.anbUserUserId = anbUserUserId;
 }
 public String getEmpName() {
 	return empName;

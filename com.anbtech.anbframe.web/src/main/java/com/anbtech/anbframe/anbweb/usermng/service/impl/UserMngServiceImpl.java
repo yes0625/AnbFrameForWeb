@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.anbtech.anbframe.anbweb.usermng.dao.UserMngDAO;
 import com.anbtech.anbframe.anbweb.usermng.service.UserMngService;
@@ -19,20 +21,27 @@ private static final Logger LOG = LoggerFactory.getLogger(UserMngServiceImpl.cla
 	@Autowired
 	private UserMngDAO userMngDAO;
 	
-	public List getListUser(UserMngVO param){
+	public List getListUser(UserMngVO param) throws Exception{
 		return userMngDAO.getListUser(param);
 	}
 	
-	public int updateUser(UserMngVO param){
+	@Transactional(propagation=Propagation.REQUIRED)
+	synchronized public int updateUser(UserMngVO param) throws Exception{
 		return userMngDAO.updateUser(param);
 	}
 	
-	public int deleteUser(UserMngVO param){
+	@Transactional(propagation=Propagation.REQUIRED)
+	synchronized public int deleteUser(UserMngVO param) throws Exception{
 		return userMngDAO.deleteUser(param);
 	}
 	
-	public void inserUser(UserMngVO param){
+	@Transactional(propagation=Propagation.REQUIRED)
+	synchronized public void inserUser(UserMngVO param) throws Exception{
 		userMngDAO.insertUser(param);
+	}
+	
+	public int checkDuplicationId(UserMngVO param) throws Exception{
+		return userMngDAO.checkDuplicationId(param);
 	}
 
 }

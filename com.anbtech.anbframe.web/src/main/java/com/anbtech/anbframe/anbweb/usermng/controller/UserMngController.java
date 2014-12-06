@@ -1,7 +1,10 @@
 package com.anbtech.anbframe.anbweb.usermng.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,30 +35,75 @@ public class UserMngController {
 	UserMngService userMngService;
 	
 	
+	/**
+	 * 직원관리 메인
+	 * @param locale
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/userMng", method = RequestMethod.GET)
 	public String userMng(Locale locale, Model model) {
 		logger.info("/usermng/userMng");
-		
-		UserMngVO param = new UserMngVO();
-		//model.addAttribute("list", userMngService.getListUser(param).size());
-		
 		return "/usermng/userMng";
 	}
 	
+	/**
+	 * 직원 조회
+	 * @param param
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/getListUser", method = RequestMethod.POST)
 	public List getListUser(@ModelAttribute UserMngVO param) {
 		logger.info("/usermng/userMng");
-		return userMngService.getListUser(param);
+		List list = new ArrayList();
+		try {
+			list = userMngService.getListUser(param);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 	
 	@RequestMapping(value = "/editUser", method = RequestMethod.POST)
 	public void editUser(@ModelAttribute UserMngVO param) {
 		
-		
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 
 	}
+	
+	/**
+	 * 직원 추가
+	 * @param param
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/insertUser", method = RequestMethod.POST)
+	public Map insertUser(@ModelAttribute UserMngVO param) {
+		logger.info("/usermng/insertUser");
+		Map result = new HashMap();
+		try {
+			int cnt  = userMngService.checkDuplicationId(param);
+			if(cnt > 0)
+				result.put("duplication", "Y");
+			else{
+				userMngService.inserUser(param);
+				result.put("duplication", "N");
+			}
+			result.put("result", "success");
+		} catch (Exception e) {
+			// TODO: handle exception
+			result.put("errorMsg", "직원 등록 중 오류 발생..");
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	
 }

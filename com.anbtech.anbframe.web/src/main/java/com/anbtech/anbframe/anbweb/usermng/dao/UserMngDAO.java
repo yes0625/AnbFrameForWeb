@@ -22,6 +22,7 @@ public class UserMngDAO {
 	 */
 	public ArrayList getListUser(UserMngVO param){
 		String sql = "SELECT EMP_ID empId"
+						 + ",ANB_USER_USER_ID  anbUserUserId"
 					     + ",EMP_NAME  empName"
 				         + ", EMP_EMAIL empEmail"
 				         + ", EMP_NAME_ENG empNameEng"
@@ -43,7 +44,7 @@ public class UserMngDAO {
 	 *  
 	 * @return 수정된 row 수
 	 */
-	public int updateUser(UserMngVO param){
+	synchronized public int updateUser(UserMngVO param){
 		int cnt = 0;
 		return cnt;
 	}
@@ -53,7 +54,7 @@ public class UserMngDAO {
 	 *  
 	 * @return 삭제된 row 수
 	 */
-	public int deleteUser(UserMngVO param){
+	synchronized public int deleteUser(UserMngVO param){
 		int cnt = 0;
 		return cnt;
 	}
@@ -63,8 +64,56 @@ public class UserMngDAO {
 	 *  
 	 * @return N/A
 	 */
-	public void insertUser(UserMngVO param){
-		
+	synchronized public void insertUser(UserMngVO param) throws Exception{
+			String sql = "INSERT INTO ANB_EMPLOYEE (EMP_ID, ANB_USER_USER_ID, ANB_RANK_RANK_CODE, ANB_DIV_DIV_CODE, ANB_PRIVILEGE_PRI_CODE, EMP_NAME, EMP_EMAIL, EMP_NAME_ENG, EMP_PHONE, EMP_HANDPHONE, EMP_ADDRESS, IN_DATE, MAR_DATE, POST_CODE, MAR_YN, CAR_YN, EMP_TYPE) "
+					+ "VALUES (? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? ,  ? , ? , ? , ? , ?) ";
+			jdbcTemplate.update(sql, new Object[] { 
+				getEmpId(),
+				param.getAnbUserUserId(),
+				param.getAnbRankRankCode(),       
+				param.getAnbDivDivCode(),         
+				param.getAnbPrivilegePriCode(),   
+				param.getEmpName(),               
+				param.getEmpEmail(),              
+				param.getEmpNameEng(),            
+				param.getEmpPhone(),              
+				param.getEmpHandphone(),          
+				param.getEmpAddress(),            
+				param.getInDate(),                
+				param.getMarDate(),               
+				param.getPostCode(),              
+				param.getMarYn(),                 
+				param.getCarYn(),                 
+				param.getEmpType()});               
+				
+	}
+	
+	
+	/**
+	 * 신규 사번 생성
+	 * @return
+	 */
+	public String getEmpId() throws Exception{
+		String sql = "select 'A'||LPAD(TO_NUMBER(SUBSTR(max(emp_id),2,5)) + 1,5,'0')"
+				+"from ANB_EMPLOYEE";
+		String empId = "";
+		empId = (String) jdbcTemplate.queryForObject(sql, String.class);
+		return empId;
+	}
+	
+	/**
+	 * 아이디 중복 체크
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("deprecation")
+	public int checkDuplicationId(UserMngVO param) throws Exception{
+		StringBuilder sb = new StringBuilder();
+		sb.append(" SELECT COUNT(*) ");
+		sb.append(" from ANB_EMPLOYEE ");
+        sb.append(" where ANB_USER_USER_ID  = ? ");
+        return (int) jdbcTemplate.queryForInt(sb.toString(),new Object[] {param.getAnbUserUserId()});
 	}
 	
 }
