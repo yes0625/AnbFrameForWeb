@@ -1,7 +1,15 @@
 package com.anbtech.anbframe.anbweb.vo;
 
 public class DeptManageVO {
-	String div_name, div_code, div_parent;
+	String div_name, div_code, div_parent, div_code_old;
+
+	public String getDiv_code_old() {
+		return div_code_old;
+	}
+
+	public void setDiv_code_old(String div_code_old) {
+		this.div_code_old = div_code_old;
+	}
 
 	public String getDiv_name() {
 		return div_name;

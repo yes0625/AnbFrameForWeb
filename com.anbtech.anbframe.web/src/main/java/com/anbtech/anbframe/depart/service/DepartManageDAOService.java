@@ -2,6 +2,8 @@ package com.anbtech.anbframe.depart.service;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.anbtech.anbframe.anbweb.vo.DeptManageVO;
 
 /**
@@ -15,4 +17,15 @@ public interface DepartManageDAOService {
 	public void dept_insert(String div_name,String div_code,String div_parent);
 	public void dept_update(String div_name,String div_code,String div_parent,String old_code);
 	public void dept_delete(String div_code);
+	
+	/**
+	 * 부서정보를 업데이트
+	 *
+	 * @param <T> the generic type
+	 * @param entity the entity
+	 * @return the int
+	 * @throws Exception the exception
+	 */
+	@Transactional
+	public int updateDiv(DeptManageVO param) throws Exception;	
 }

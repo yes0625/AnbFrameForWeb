@@ -16,6 +16,7 @@ import com.anbtech.anbframe.anbweb.DepartManageController;
 import com.anbtech.anbframe.anbweb.usermng.vo.UserMngVO;
 import com.anbtech.anbframe.anbweb.vo.DeptManageVO;
 import com.anbtech.anbframe.depart.service.DepartManageDAOService;
+import com.anbtech.anbframe.entities.AnbUser;
 
 @Service
 public class DepartManageDAOServiceImpl implements DepartManageDAOService{
@@ -63,5 +64,18 @@ public class DepartManageDAOServiceImpl implements DepartManageDAOService{
 		LOG.info("DELETE>> CODE:"+"||"+div_code+"||");
 		LOG.info(">> :"+sql);
 		jdbcTemplate.update(sql,obj);
+	}
+
+	public int updateDiv(DeptManageVO param) throws Exception {
+		StringBuffer sb = new StringBuffer();
+		sb.append(" UPDATE ANB_DIV SET DIV_NAME = ? , DIV_CODE = ? , DIV_PARENT = ? WHERE DIV_CODE=? ");
+		
+		Object[] obj = {param.getDiv_name(), param.getDiv_code(), param.getDiv_parent(), param.getDiv_code_old()};
+		String sql = sb.toString();
+		LOG.info(">> :"+param.getDiv_name());
+		LOG.info(">> :"+param.getDiv_code());
+		LOG.info(">> :"+param.getDiv_parent());
+		LOG.info(">> :"+param.getDiv_code_old());
+		return jdbcTemplate.update(sql,obj);
 	}
 }
