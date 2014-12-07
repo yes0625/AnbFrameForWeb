@@ -119,23 +119,15 @@
         
         function destroyUser(){
             var row = $('#dg').datagrid('getSelected');
-            if (row){
+            if (row.anbUserUserId != null){
                 $.messager.confirm('Confirm','Are you sure you want to destroy this user?',function(r){
                     if (r){
-                        $.post('destroy_user.php',{id:row.empId},function(result){
-                            if (result.success){
-                                $('#dg').datagrid('reload');    // reload the user data
-                            } else {
-                                $.messager.show({    // show error message
-                                    title: 'Error',
-                                    msg: result.errorMsg
-                                });
-                            }
-                        },'json');
+                        $.post('${pageContext.request.contextPath }/usermng/deleteUser.do?user_id='+row.anbUserUserId
+                        		,function(result){
+                            $('#dg').datagrid('reload');    // reload the user data
+                    	},'json');
                     }
                 });
-            }else{
-            	$.messager.alert('','삭제할 row 를 선택하세요.','info');
             }
         }
         

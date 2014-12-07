@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anbtech.anbframe.anbweb.usermng.service.UserMngService;
@@ -105,5 +106,15 @@ public class UserMngController {
 		return result;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+	public void deleteUser(@RequestParam(required=false,value="user_id") String user_id) throws Exception {
+		//try {
+			userMngService.deleteUser(user_id);
+		//} catch (Exception e) {
+			// TODO Auto-generated catch block
+		//	e.printStackTrace();
+		//}
+	}
 	
 }

@@ -54,9 +54,13 @@ public class UserMngDAO {
 	 *  
 	 * @return 삭제된 row 수
 	 */
-	synchronized public int deleteUser(UserMngVO param){
-		int cnt = 0;
-		return cnt;
+	synchronized public void deleteUser(String user_id){
+		StringBuffer sb = new StringBuffer();
+		
+		sb.append(" DELETE FROM ANB_EMPLOYEE where anb_user_user_id = ?");
+		Object[] args = {user_id};
+		String sql = sb.toString();
+		jdbcTemplate.update(sql, args);
 	}
 	
 	/**
