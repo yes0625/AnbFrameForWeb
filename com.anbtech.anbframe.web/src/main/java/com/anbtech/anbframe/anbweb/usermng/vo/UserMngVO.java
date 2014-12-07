@@ -19,8 +19,14 @@ public class UserMngVO {
  private String marYn;
  private String carYn;
  private String empType;
+ private String mode;
 
- 
+public String getMode() {
+	return mode;
+}
+public void setMode(String mode) {
+	this.mode = mode;
+}
 public String getAnbRankRankCode() {
 	return anbRankRankCode;
 }

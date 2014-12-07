@@ -35,7 +35,9 @@ public class UserMngDAO {
 				         + ", MAR_YN marYn"
 				         + ", CAR_YN carYn"
 				         + ", EMP_TYPE empType"
-				         + " FROM ANB_EMPLOYEE";
+				         + " FROM ANB_EMPLOYEE ";
+		
+		
 		return (ArrayList)jdbcTemplate.query(sql,new BeanPropertyRowMapper(UserMngVO.class));
 	}
 	
@@ -46,6 +48,18 @@ public class UserMngDAO {
 	 */
 	synchronized public int updateUser(UserMngVO param){
 		int cnt = 0;
+		StringBuilder sb = new StringBuilder(); 
+		sb.append(" UPDATE ANB_EMPLOYEE SET ");
+		sb.append(" EMP_NAME = ?");
+		sb.append(" ,EMP_EMAIL = ?");
+		sb.append(" ,EMP_PHONE = ?");
+		sb.append(" ,EMP_ADDRESS = ?");
+		sb.append(" WHERE ANB_USER_USER_ID = ?");
+		cnt = jdbcTemplate.update(sb.toString(),param.getEmpName()
+				,param.getEmpEmail()
+				,param.getEmpPhone()
+				,param.getEmpAddress()
+				,param.getAnbUserUserId());
 		return cnt;
 	}
 	
@@ -54,7 +68,7 @@ public class UserMngDAO {
 	 *  
 	 * @return 삭제된 row 수
 	 */
-	synchronized public int deleteUser(UserMngVO param){
+	synchronized public int deleteUser(UserMngVO param) throws Exception{
 		int cnt = 0;
 		return cnt;
 	}
@@ -65,7 +79,8 @@ public class UserMngDAO {
 	 * @return N/A
 	 */
 	synchronized public void insertUser(UserMngVO param) throws Exception{
-			String sql = "INSERT INTO ANB_EMPLOYEE (EMP_ID, ANB_USER_USER_ID, ANB_RANK_RANK_CODE, ANB_DIV_DIV_CODE, ANB_PRIVILEGE_PRI_CODE, EMP_NAME, EMP_EMAIL, EMP_NAME_ENG, EMP_PHONE, EMP_HANDPHONE, EMP_ADDRESS, IN_DATE, MAR_DATE, POST_CODE, MAR_YN, CAR_YN, EMP_TYPE) "
+		insertAnbUser(param);
+		String sql = "INSERT INTO ANB_EMPLOYEE (EMP_ID, ANB_USER_USER_ID, ANB_RANK_RANK_CODE, ANB_DIV_DIV_CODE, ANB_PRIVILEGE_PRI_CODE, EMP_NAME, EMP_EMAIL, EMP_NAME_ENG, EMP_PHONE, EMP_HANDPHONE, EMP_ADDRESS, IN_DATE, MAR_DATE, POST_CODE, MAR_YN, CAR_YN, EMP_TYPE) "
 					+ "VALUES (? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? , ? ,  ? , ? , ? , ? , ?) ";
 			jdbcTemplate.update(sql, new Object[] { 
 				getEmpId(),
@@ -114,6 +129,24 @@ public class UserMngDAO {
 		sb.append(" from ANB_EMPLOYEE ");
         sb.append(" where ANB_USER_USER_ID  = ? ");
         return (int) jdbcTemplate.queryForInt(sb.toString(),new Object[] {param.getAnbUserUserId()});
+	}
+	
+	private void insertAnbUser(UserMngVO param) throws Exception{
+		StringBuilder sb = new StringBuilder();
+		sb.append("INSERT INTO ANB_USER (USER_ID, USER_NAME, USER_PW, USER_GENDER, USER_BIRTH, SUB_DATE, MOD_DATE, PRS_STATUS )");
+		sb.append("              VALUES (? , ? , '' , '' , '' , '' , '','')");
+		jdbcTemplate.update(sb.toString(), new Object[]{
+			param.getAnbUserUserId() 
+			,param.getEmpName()
+		});
+	}
+	
+	private int deleteAnbUser(UserMngVO param)throws Exception{
+		int cnt = 0;
+		StringBuilder sb = new StringBuilder(); 
+		sb.append(" DELETE FROM ANB_USER WHERE USER_ID = ? ");
+		cnt = jdbcTemplate.update(sb.toString(),new Object[] {param.getAnbUserUserId()});
+		return cnt;
 	}
 	
 }

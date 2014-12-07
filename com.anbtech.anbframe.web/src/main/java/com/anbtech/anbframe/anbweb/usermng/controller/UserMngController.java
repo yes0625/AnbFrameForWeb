@@ -27,6 +27,7 @@ import com.anbtech.anbframe.anbweb.usermng.vo.UserMngVO;
 public class UserMngController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserMngController.class);
+	private static final String[] MODE = {"0","1"}; // 0 : INSERT , 1 : UPDATE
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -65,17 +66,14 @@ public class UserMngController {
 		return list;
 	}
 	
-	
+	@ResponseBody
 	@RequestMapping(value = "/editUser", method = RequestMethod.POST)
 	public void editUser(@ModelAttribute UserMngVO param) {
-		
 		try {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-
 	}
 	
 	/**
@@ -89,14 +87,20 @@ public class UserMngController {
 		logger.info("/usermng/insertUser");
 		Map result = new HashMap();
 		try {
-			int cnt  = userMngService.checkDuplicationId(param);
-			if(cnt > 0)
-				result.put("duplication", "Y");
-			else{
-				userMngService.inserUser(param);
-				result.put("duplication", "N");
+			// INSERT
+			if(MODE[0].equals(param.getMode())){
+				int cnt  = userMngService.checkDuplicationId(param);
+				if(cnt > 0)
+					result.put("duplication", "Y");
+				else{
+					userMngService.inserUser(param);
+					result.put("duplication", "N");
+				}
+			// UPDATE
+			}else if(MODE[1].equals(param.getMode())){
+				int updCnt = userMngService.updateUser(param);
 			}
-			result.put("result", "success");
+			result.put("success", "Y");
 		} catch (Exception e) {
 			// TODO: handle exception
 			result.put("errorMsg", "직원 등록 중 오류 발생..");
