@@ -49,9 +49,9 @@
     </div>
     
      <div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
-     <input type="hidden" id="idchk_commit" />
         <div class="ftitle">User Information</div>
         <form id="fm" method="post" novalidate>
+     	<input type="hidden" id="mode" />
             <div class="fitem">
                 <label>사용자 아이디</label>
                 <input id="anbUserUserId" name="anbUserUserId" class="easyui-textbox" required="true" maxlength="20">
