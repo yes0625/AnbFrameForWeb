@@ -15,9 +15,32 @@ var common = {
 	                        msg: result.errorMsg
 	                    });
 	                } else {
+	                	 $.messager.show({
+		                       title: 'SUCCESS',
+		                       msg: '정상 처리 되었습니다.'
+		                   				});
 	                	if(callback) callback(result);
 	                }
 	            }
 	        });
+		}
+
+		// call ajax
+		,ajaxCall : function(url,param,callback){
+			$.post(url,param,function(result){
+                if (result.success){
+                	  $.messager.show({
+                        	title: 'SUCCESS',
+                            msg  : '정상 처리 되었습니다.'
+                                     });
+                    if(callback) callback();
+                    
+                } else {
+                    $.messager.show({    // show error message
+                        title: 'Error',
+                        msg: result.errorMsg
+                    });
+                }
+            },'json');
 		}
 }

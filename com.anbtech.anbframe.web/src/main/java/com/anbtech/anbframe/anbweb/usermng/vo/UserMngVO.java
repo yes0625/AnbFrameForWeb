@@ -6,6 +6,8 @@ public class UserMngVO {
  private String anbUserUserId;
  private String anbRankRankCode;
  private String anbDivDivCode;
+ private String anbRankRankName;
+ private String anbDivDivName;
  private String anbPrivilegePriCode;
  private String empName;
  private String empEmail;
@@ -19,8 +21,27 @@ public class UserMngVO {
  private String marYn;
  private String carYn;
  private String empType;
+ private String mode;
 
  
+public String getAnbRankRankName() {
+	return anbRankRankName;
+}
+public void setAnbRankRankName(String anbRankRankName) {
+	this.anbRankRankName = anbRankRankName;
+}
+public String getAnbDivDivName() {
+	return anbDivDivName;
+}
+public void setAnbDivDivName(String anbDivDivName) {
+	this.anbDivDivName = anbDivDivName;
+}
+public String getMode() {
+	return mode;
+}
+public void setMode(String mode) {
+	this.mode = mode;
+}
 public String getAnbRankRankCode() {
 	return anbRankRankCode;
 }
