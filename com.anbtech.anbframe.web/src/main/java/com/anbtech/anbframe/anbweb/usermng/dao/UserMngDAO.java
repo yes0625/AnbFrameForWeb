@@ -22,8 +22,12 @@ public class UserMngDAO {
 	 */
 	public ArrayList getListUser(UserMngVO param){
 		String sql = "SELECT EMP_ID empId"
-						 + ",ANB_USER_USER_ID  anbUserUserId"
-					     + ",EMP_NAME  empName"
+						 + ", ANB_USER_USER_ID  anbUserUserId"
+						 + ", EMP.ANB_RANK_RANK_CODE  anbRankRankCode"
+						 + ", EMP.ANB_DIV_DIV_CODE  anbDivDivCode"
+						 + ", RANK.RANK_NAME  anbRankRankName"
+						 + ", DIV.DIV_NAME  anbDivDivName"
+					     + ", EMP_NAME  empName"
 				         + ", EMP_EMAIL empEmail"
 				         + ", EMP_NAME_ENG empNameEng"
 				         + ", EMP_PHONE  empPhone"
@@ -35,7 +39,9 @@ public class UserMngDAO {
 				         + ", MAR_YN marYn"
 				         + ", CAR_YN carYn"
 				         + ", EMP_TYPE empType"
-				         + " FROM ANB_EMPLOYEE";
+				         + "  FROM  ANB_EMPLOYEE EMP , ANB_DIV DIV , ANB_RANK RANK"
+				         + "  WHERE EMP.ANB_RANK_RANK_CODE = RANK.RANK_CODE"
+				         + "  AND EMP.ANB_DIV_DIV_CODE = DIV.DIV_CODE";
 		return (ArrayList)jdbcTemplate.query(sql,new BeanPropertyRowMapper(UserMngVO.class));
 	}
 	
@@ -52,11 +58,15 @@ public class UserMngDAO {
 		sb.append(" ,EMP_EMAIL = ?");
 		sb.append(" ,EMP_PHONE = ?");
 		sb.append(" ,EMP_ADDRESS = ?");
+		sb.append(" ,ANB_RANK_RANK_CODE = ?");
+		sb.append(" ,ANB_DIV_DIV_CODE = ?");
 		sb.append(" WHERE ANB_USER_USER_ID = ?");
 		cnt = jdbcTemplate.update(sb.toString(),param.getEmpName()
 				,param.getEmpEmail()
 				,param.getEmpPhone()
 				,param.getEmpAddress()
+				,param.getAnbRankRankCode()
+				,param.getAnbDivDivCode()
 				,param.getAnbUserUserId());
 		return cnt;
 	}

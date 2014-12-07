@@ -34,6 +34,10 @@
 		            <tr>
 		            	<th field="anbUserUserId" width="50">사용자 아이디</th>
 		            	<th field="empName" width="50">사용자이름</th>
+		            	<th field="anbRankRankCode" hidden width="50">직급</th>
+		            	<th field="anbDivDivCode" hidden width="50">부서</th>
+		            	<th field="anbRankRankName" width="50">직급</th>
+		            	<th field="anbDivDivName" width="50">부서</th>
 		                <th field="empEmail" width="50">이메일</th>               
 		                <th field="empPhone" width="50">전화번호</th>
 		                <th field="empAddress" width="50">주소</th>
@@ -48,7 +52,7 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">Remove User</a>
     </div>
     
-     <div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
+     <div id="dlg" class="easyui-dialog" style="width:400px;height:340px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
         <div class="ftitle">User Information</div>
         <form id="fm" method="post" novalidate>
      	<input type="hidden" id="mode" name="mode" />
@@ -72,6 +76,14 @@
                 <label>주소</label>
                 <input name="empAddress" class="easyui-textbox">
             </div>
+            <div class="fitem">
+                <label>직급</label>
+                <input class="easyui-combobox" id="anbRankRankCode" name="anbRankRankCode" data-options="valueField:'code',textField:'name'">
+            </div>
+            <div class="fitem">
+                <label>부서</label>
+                <input class="easyui-combobox" id="anbDivDivCode" name="anbDivDivCode" data-options="valueField:'code',textField:'name'">
+            </div>
         </form>
     </div>
     <div id="dlg-buttons">
@@ -83,14 +95,14 @@
 
 
 <script type="text/javascript">
-        var url;
         
         function newUser(){
             $('#dlg').dialog('open').dialog('setTitle','New User');
             $('#anbUserUserId').textbox('readonly',false);
             $('#fm').form('clear');
             $('#mode').val("0");
-            url = '';
+            $('#anbDivDivCode').combobox('reload', '${pageContext.request.contextPath }/com/getListCode.do?table=ANB_DIV&sel1=DIV_CODE&sel2=DIV_NAME');
+            $('#anbRankRankCode').combobox('reload', '${pageContext.request.contextPath }/com/getListCode.do?table=ANB_RANK&sel1=RANK_CODE&sel2=RANK_NAME');
         }
         
         function editUser(){
@@ -100,8 +112,8 @@
                 $('#anbUserUserId').textbox('readonly',true);
                 $('#fm').form('load',row);
             	$('#mode').val("1");
-                
-                url = '${pageContext.request.contextPath }/usermng/editUser.do';
+            	$('#anbDivDivCode').combobox('reload', '${pageContext.request.contextPath }/com/getListCode.do?table=ANB_DIV&sel1=DIV_CODE&sel2=DIV_NAME');
+                $('#anbRankRankCode').combobox('reload', '${pageContext.request.contextPath }/com/getListCode.do?table=ANB_RANK&sel1=RANK_CODE&sel2=RANK_NAME');
             }else{
             	$.messager.alert('','수정할 row 를 선택하세요.','info');
             }
@@ -135,5 +147,9 @@
                 });
             }
         }
+        
+        $( document ).ready(function() {
+        	
+        });
         
     </script>
