@@ -31,8 +31,8 @@ private static final Logger LOG = LoggerFactory.getLogger(UserMngServiceImpl.cla
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRED)
-	synchronized public int deleteUser(UserMngVO param) throws Exception{
-		return userMngDAO.deleteUser(param);
+	synchronized public void deleteUser(String user_id) throws Exception{
+		userMngDAO.deleteUser(user_id);
 	}
 	
 	@Transactional(propagation=Propagation.REQUIRED)

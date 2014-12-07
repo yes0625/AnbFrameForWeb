@@ -2,8 +2,6 @@ package com.anbtech.anbframe.anbweb.usermng.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.anbtech.anbframe.anbweb.usermng.vo.UserMngVO;
 
 public interface UserMngService {
@@ -12,7 +10,7 @@ public interface UserMngService {
 	
 	public int updateUser(UserMngVO param) throws Exception;
 	
-	public int deleteUser(UserMngVO param) throws Exception;
+	public void deleteUser(String user_id) throws Exception;
 	
 	public void inserUser(UserMngVO param) throws Exception;
 
