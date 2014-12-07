@@ -51,7 +51,7 @@
      <div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
         <div class="ftitle">User Information</div>
         <form id="fm" method="post" novalidate>
-     	<input type="hidden" id="mode" />
+     	<input type="hidden" id="mode" name="mode" />
             <div class="fitem">
                 <label>사용자 아이디</label>
                 <input id="anbUserUserId" name="anbUserUserId" class="easyui-textbox" required="true" maxlength="20">
