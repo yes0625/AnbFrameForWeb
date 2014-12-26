@@ -1,5 +1,4 @@
 var common = {
-		
 		// form submit 
 		formSubmit : function(frm,url,callback){
 			$('#'+frm).form('submit',{

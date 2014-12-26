@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.anbtech.anbframe.anbweb.usermng.dao.UserMngDAO;
-import com.anbtech.anbframe.anbweb.usermng.vo.UserMngVO;
+import com.anbtech.anbframe.anbweb.vo.UserMngVO;
+import com.anbtech.anbframe.usermng.service.UserMngDAOService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(value="classpath*:/spring/context-*.xml")
@@ -22,7 +22,7 @@ public class UserMngTest {
 	private static final Logger LOG = LoggerFactory.getLogger(UserMngTest.class);
 	
 	@Autowired
-	private UserMngDAO dao;
+	private UserMngDAOService dao;
 	
 	@Test
 	public void testName() throws Exception {

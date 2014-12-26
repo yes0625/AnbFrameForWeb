@@ -1,13 +1,10 @@
 package com.anbtech.anbframe.depart.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.anbtech.anbframe.anbweb.usermng.dao.UserMngDAO;
-import com.anbtech.anbframe.anbweb.usermng.vo.UserMngVO;
 import com.anbtech.anbframe.anbweb.vo.DeptManageVO;
 import com.anbtech.anbframe.depart.service.DepartManageDAOService;
 import com.anbtech.anbframe.depart.service.DepartManageService;

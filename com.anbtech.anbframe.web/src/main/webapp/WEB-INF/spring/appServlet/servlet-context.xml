@@ -3,9 +3,12 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<context:component-scan base-package="com.anbtech"/>
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
@@ -24,5 +27,19 @@
 
 	<!-- anb~.jar 로 추가한 클래스패스를 활성화 시키기위해 아래와 같이 적용  -->
 	<beans:import resource="classpath*:/spring/context-*.xml"/>
+	
+	<!-- tiles -->
+	 <beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+        <beans:property name="order" value="1"/>
+    </beans:bean>
+
+    <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <beans:property name="definitions">
+            <beans:list>
+                 <beans:value>/WEB-INF/tiles/tiles-layout.xml</beans:value>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
 	
 </beans:beans>
