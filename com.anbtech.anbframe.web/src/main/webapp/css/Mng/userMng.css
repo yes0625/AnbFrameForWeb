@@ -20,4 +20,8 @@
         .fitem input{
             width:160px;
         }
+        
+        #mainBody{
+        	margin : 60px auto;
+        }
     </style>

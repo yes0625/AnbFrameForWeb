@@ -1,25 +1,25 @@
-package com.anbtech.anbframe.anbweb.usermng.dao;
+package com.anbtech.anbframe.usermng.service.persist;
 
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
-import com.anbtech.anbframe.anbweb.usermng.vo.UserMngVO;
+import com.anbtech.anbframe.anbweb.vo.UserMngVO;
+import com.anbtech.anbframe.usermng.service.UserMngDAOService;
 
-@Repository
-public class UserMngDAO {
+@Service
+public class UserMngDAOServiceImpl implements UserMngDAOService {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	/**
-	 * 직원 조회
-	 *  
-	 * @return 직원 리스트
+	/* (non-Javadoc)
+	 * @see com.anbtech.anbframe.usermng.service.persist.UserMngDAOService#getListUser(com.anbtech.anbframe.anbweb.usermng.vo.UserMngVO)
 	 */
+	@Override
 	public ArrayList getListUser(UserMngVO param){
 		String sql = "SELECT EMP_ID empId"
 						 + ", ANB_USER_USER_ID  anbUserUserId"
@@ -45,11 +45,10 @@ public class UserMngDAO {
 		return (ArrayList)jdbcTemplate.query(sql,new BeanPropertyRowMapper(UserMngVO.class));
 	}
 	
-	/**
-	 * 직원 수정
-	 *  
-	 * @return 수정된 row 수
+	/* (non-Javadoc)
+	 * @see com.anbtech.anbframe.usermng.service.persist.UserMngDAOService#updateUser(com.anbtech.anbframe.anbweb.usermng.vo.UserMngVO)
 	 */
+	@Override
 	synchronized public int updateUser(UserMngVO param){
 		int cnt = 0;
 		StringBuilder sb = new StringBuilder(); 
@@ -71,11 +70,10 @@ public class UserMngDAO {
 		return cnt;
 	}
 	
-	/**
-	 * 직원 삭제
-	 *  
-	 * @return 삭제된 row 수
+	/* (non-Javadoc)
+	 * @see com.anbtech.anbframe.usermng.service.persist.UserMngDAOService#deleteUser(java.lang.String)
 	 */
+	@Override
 	synchronized public void deleteUser(String user_id) throws Exception{
 		StringBuffer sb = new StringBuffer();
 		
@@ -86,11 +84,10 @@ public class UserMngDAO {
 		deleteAnbUser(user_id);
 	}
 	
-	/**
-	 * 직원 신규 등록
-	 *  
-	 * @return N/A
+	/* (non-Javadoc)
+	 * @see com.anbtech.anbframe.usermng.service.persist.UserMngDAOService#insertUser(com.anbtech.anbframe.anbweb.usermng.vo.UserMngVO)
 	 */
+	@Override
 	synchronized public void insertUser(UserMngVO param) throws Exception{
 		    insertAnbUser(param);
 			String sql = "INSERT INTO ANB_EMPLOYEE (EMP_ID, ANB_USER_USER_ID, ANB_RANK_RANK_CODE, ANB_DIV_DIV_CODE, ANB_PRIVILEGE_PRI_CODE, EMP_NAME, EMP_EMAIL, EMP_NAME_ENG, EMP_PHONE, EMP_HANDPHONE, EMP_ADDRESS, IN_DATE, MAR_DATE, POST_CODE, MAR_YN, CAR_YN, EMP_TYPE) "
@@ -117,10 +114,10 @@ public class UserMngDAO {
 	}
 	
 	
-	/**
-	 * 신규 사번 생성
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.anbtech.anbframe.usermng.service.persist.UserMngDAOService#getEmpId()
 	 */
+	@Override
 	public String getEmpId() throws Exception{
 		String sql = "select 'A'||LPAD(TO_NUMBER(SUBSTR(max(emp_id),2,5)) + 1,5,'0')"
 				+"from ANB_EMPLOYEE";
@@ -129,12 +126,10 @@ public class UserMngDAO {
 		return empId;
 	}
 	
-	/**
-	 * 아이디 중복 체크
-	 * @param param
-	 * @return
-	 * @throws Exception
+	/* (non-Javadoc)
+	 * @see com.anbtech.anbframe.usermng.service.persist.UserMngDAOService#checkDuplicationId(com.anbtech.anbframe.anbweb.usermng.vo.UserMngVO)
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	public int checkDuplicationId(UserMngVO param) throws Exception{
 		StringBuilder sb = new StringBuilder();

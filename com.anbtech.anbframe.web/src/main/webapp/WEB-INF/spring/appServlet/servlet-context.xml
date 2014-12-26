@@ -28,4 +28,18 @@
 	<!-- anb~.jar 로 추가한 클래스패스를 활성화 시키기위해 아래와 같이 적용  -->
 	<beans:import resource="classpath*:/spring/context-*.xml"/>
 	
+	<!-- tiles -->
+	 <beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+        <beans:property name="order" value="1"/>
+    </beans:bean>
+
+    <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <beans:property name="definitions">
+            <beans:list>
+                 <beans:value>/WEB-INF/tiles/tiles-layout.xml</beans:value>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+	
 </beans:beans>

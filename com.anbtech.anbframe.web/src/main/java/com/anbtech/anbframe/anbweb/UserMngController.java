@@ -1,4 +1,4 @@
-package com.anbtech.anbframe.anbweb.usermng.controller;
+package com.anbtech.anbframe.anbweb;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.anbtech.anbframe.anbweb.usermng.service.UserMngService;
-import com.anbtech.anbframe.anbweb.usermng.vo.UserMngVO;
+import com.anbtech.anbframe.anbweb.vo.UserMngVO;
+import com.anbtech.anbframe.usermng.service.UserMngService;
 
 /**
  * Handles requests for the application home page.
@@ -46,7 +46,7 @@ public class UserMngController {
 	@RequestMapping(value = "/userMng", method = RequestMethod.GET)
 	public String userMng(Locale locale, Model model) {
 		logger.info("/usermng/userMng");
-		return "/usermng/userMng";
+		return "tiles:usermng/userMng";
 	}
 	
 	/**

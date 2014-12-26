@@ -1,4 +1,4 @@
-package com.anbtech.anbframe.anbweb.com.vo;
+package com.anbtech.anbframe.anbweb.vo;
 
 public class CodeMngVO {
 

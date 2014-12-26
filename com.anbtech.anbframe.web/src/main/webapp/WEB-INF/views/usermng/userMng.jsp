@@ -1,23 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>개발센터 웹어플리케이션</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/themes/icon.css">
-<link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/resources/themes/color.css">
-<link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath }/css/Mng/userMng.css">
-<script type="text/javascript"	src="${pageContext.request.contextPath }/resources/jquery.min.js"></script>
-<script type="text/javascript"	src="${pageContext.request.contextPath }/resources/jquery.easyui.min.js"></script>
-<script type="text/javascript"	src="${pageContext.request.contextPath }/resources/common/common.js"></script>
-<head>
-	<title>직원관리</title>
-</head>
-<body>
-
-	<div style="width:700px;">
+	<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+	<script type="text/javascript"	src="${pageContext.request.contextPath }/js/usermng/userMng.js"></script>
+	<div id="mainBody" style="width:700px;">
 	  <div style="float:right; margin-bottom:5px;">		
 	  		<select class="easyui-combobox" name="state" style="width:100px;">
 		        <option value="empId">사용자아이디</option>
@@ -47,9 +30,9 @@
 		</div>
 	</div>
     <div id="toolbar">
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">New User</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">Edit User</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">Remove User</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="userMng.newUser()">New User</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="userMng.editUser()">Edit User</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="userMng.removeUser()">Remove User</a>
     </div>
     
      <div id="dlg" class="easyui-dialog" style="width:400px;height:340px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
@@ -87,69 +70,6 @@
         </form>
     </div>
     <div id="dlg-buttons">
-        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUser()" style="width:90px">Save</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="userMng.saveUser()" style="width:90px">Save</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancel</a>
     </div>
-</body>
-</html>
-
-
-<script type="text/javascript">
-        
-        function newUser(){
-            $('#dlg').dialog('open').dialog('setTitle','New User');
-            $('#anbUserUserId').textbox('readonly',false);
-            $('#fm').form('clear');
-            $('#mode').val("0");
-            $('#anbDivDivCode').combobox('reload', '${pageContext.request.contextPath }/com/getListCode.do?table=ANB_DIV&sel1=DIV_CODE&sel2=DIV_NAME');
-            $('#anbRankRankCode').combobox('reload', '${pageContext.request.contextPath }/com/getListCode.do?table=ANB_RANK&sel1=RANK_CODE&sel2=RANK_NAME');
-        }
-        
-        function editUser(){
-            var row = $('#dg').datagrid('getSelected');
-            if (row){
-                $('#dlg').dialog('open').dialog('setTitle','Edit User');
-                $('#anbUserUserId').textbox('readonly',true);
-                $('#fm').form('load',row);
-            	$('#mode').val("1");
-            	$('#anbDivDivCode').combobox('reload', '${pageContext.request.contextPath }/com/getListCode.do?table=ANB_DIV&sel1=DIV_CODE&sel2=DIV_NAME');
-                $('#anbRankRankCode').combobox('reload', '${pageContext.request.contextPath }/com/getListCode.do?table=ANB_RANK&sel1=RANK_CODE&sel2=RANK_NAME');
-            }else{
-            	$.messager.alert('','수정할 row 를 선택하세요.','info');
-            }
-        }
-        
-        function saveUser(){
-        	common.formSubmit('fm','${pageContext.request.contextPath }/usermng/insertUser.do',function(result){
-            	if(result.duplication == "Y"){
-                $.messager.show({
-                	title: '아이디중복',
-                    msg:   '중복되는 아이디 입니다.'
-                               });            		
-               	}else{
-	                $('#dlg').dialog('close');        // close the dialog
-    	            $('#dg').datagrid('reload');    // reload the user data
-               	}            	
-            });
-        }
-        
-        
-        function destroyUser(){
-            var row = $('#dg').datagrid('getSelected');
-            if (row.anbUserUserId != null){
-                $.messager.confirm('Confirm','Are you sure you want to destroy this user?',function(r){
-                    if (r){
-                        $.post('${pageContext.request.contextPath }/usermng/deleteUser.do?user_id='+row.anbUserUserId
-                        		,function(result){
-                            $('#dg').datagrid('reload');    // reload the user data
-                    	},'json');
-                    }
-                });
-            }
-        }
-        
-        $( document ).ready(function() {
-        	
-        });
-        
-    </script>

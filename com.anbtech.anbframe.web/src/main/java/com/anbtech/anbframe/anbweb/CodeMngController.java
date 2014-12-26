@@ -1,4 +1,4 @@
-package com.anbtech.anbframe.anbweb.com.controller;
+package com.anbtech.anbframe.anbweb;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,17 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.anbtech.anbframe.anbweb.com.sevice.CodeMngService;
-import com.anbtech.anbframe.anbweb.com.vo.CodeMngVO;
+import com.anbtech.anbframe.anbweb.vo.CodeMngVO;
+import com.anbtech.anbframe.common.service.CodeMngService;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
-@RequestMapping(value="/com")
+@RequestMapping(value="/common")
 public class CodeMngController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CodeMngController.class);

@@ -1,22 +1,17 @@
 package com.anbtech.anbframe.depart.service.persist;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Service;
 
-import com.anbtech.anbframe.anbweb.DepartManageController;
-import com.anbtech.anbframe.anbweb.usermng.vo.UserMngVO;
 import com.anbtech.anbframe.anbweb.vo.DeptManageVO;
 import com.anbtech.anbframe.depart.service.DepartManageDAOService;
-import com.anbtech.anbframe.entities.AnbUser;
 
 @Service
 public class DepartManageDAOServiceImpl implements DepartManageDAOService{

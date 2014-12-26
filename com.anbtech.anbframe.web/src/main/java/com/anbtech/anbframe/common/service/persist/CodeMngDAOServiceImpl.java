@@ -1,25 +1,25 @@
-package com.anbtech.anbframe.anbweb.com.dao;
+package com.anbtech.anbframe.common.service.persist;
 
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
-import com.anbtech.anbframe.anbweb.com.vo.CodeMngVO;
+import com.anbtech.anbframe.anbweb.vo.CodeMngVO;
+import com.anbtech.anbframe.common.service.CodeMngDAOService;
 
-@Repository
-public class CodeMngDAO {
+@Service
+public class CodeMngDAOServiceImpl implements CodeMngDAOService {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	/**
-	 * 코드 목록 조회
-	 *  
-	 * @return 코드 목록
+	/* (non-Javadoc)
+	 * @see com.anbtech.anbframe.common.service.persist.CodeMngDAOService#getListCode(com.anbtech.anbframe.anbweb.com.vo.CodeMngVO)
 	 */
+	@Override
 	public ArrayList getListCode(CodeMngVO param) throws Exception{
 		StringBuilder sb = new StringBuilder();
 		sb.append(" SELECT ");

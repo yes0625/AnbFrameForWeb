@@ -1,8 +1,8 @@
-package com.anbtech.anbframe.anbweb.usermng.service;
+package com.anbtech.anbframe.usermng.service;
 
 import java.util.List;
 
-import com.anbtech.anbframe.anbweb.usermng.vo.UserMngVO;
+import com.anbtech.anbframe.anbweb.vo.UserMngVO;
 
 public interface UserMngService {
 	

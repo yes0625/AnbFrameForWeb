@@ -1,8 +1,8 @@
-package com.anbtech.anbframe.anbweb.com.sevice;
+package com.anbtech.anbframe.common.service;
 
 import java.util.List;
 
-import com.anbtech.anbframe.anbweb.com.vo.CodeMngVO;
+import com.anbtech.anbframe.anbweb.vo.CodeMngVO;
 
 public interface CodeMngService {
 	

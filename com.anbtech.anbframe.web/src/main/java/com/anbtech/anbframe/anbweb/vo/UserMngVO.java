@@ -1,4 +1,4 @@
-package com.anbtech.anbframe.anbweb.usermng.vo;
+package com.anbtech.anbframe.anbweb.vo;
 
 public class UserMngVO {
 	
