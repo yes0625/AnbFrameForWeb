@@ -19,7 +19,6 @@ public class CodeMngDAOServiceImpl implements CodeMngDAOService {
 	/* (non-Javadoc)
 	 * @see com.anbtech.anbframe.common.service.persist.CodeMngDAOService#getListCode(com.anbtech.anbframe.anbweb.com.vo.CodeMngVO)
 	 */
-	@Override
 	public ArrayList getListCode(CodeMngVO param) throws Exception{
 		StringBuilder sb = new StringBuilder();
 		sb.append(" SELECT ");

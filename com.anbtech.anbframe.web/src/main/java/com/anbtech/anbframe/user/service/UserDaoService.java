@@ -2,7 +2,7 @@ package com.anbtech.anbframe.user.service;
 
 import java.util.List;
 
-import com.anbtch.anbframe.enums.UserCondiType;
+import com.anbtech.anbframe.enums.UserCondiType;
 
 
 

@@ -21,7 +21,6 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired = true;
     private boolean enabled = true;
 
-    @Override
     public String getUsername() {
         return username;
     }
@@ -30,7 +29,6 @@ public class User implements UserDetails {
         this.username = username;
     }
 
-    @Override
     public String getPassword() {
         return password;
     }
@@ -39,7 +37,6 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.authorities;
     }
@@ -48,7 +45,6 @@ public class User implements UserDetails {
         this.authorities = authorities;
     }
 
-    @Override
     public boolean isAccountNonExpired() {
         return this.accountNonExpired;
     }
@@ -57,7 +53,6 @@ public class User implements UserDetails {
         this.accountNonExpired = accountNonExpired;
     }
 
-    @Override
     public boolean isAccountNonLocked() {
         return this.accountNonLocked;
     }
@@ -66,7 +61,6 @@ public class User implements UserDetails {
         this.accountNonLocked = accountNonLocked;
     }
 
-    @Override
     public boolean isCredentialsNonExpired() {
         return this.credentialsNonExpired;
     }
@@ -75,7 +69,6 @@ public class User implements UserDetails {
         this.credentialsNonExpired = credentialsNonExpired;
     }
 
-    @Override
     public boolean isEnabled() {
         return this.enabled;
     }

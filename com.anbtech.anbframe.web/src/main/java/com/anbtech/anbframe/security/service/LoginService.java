@@ -23,7 +23,7 @@ import com.anbtech.anbframe.security.service.domain.User;
 public class LoginService implements UserDetailsService {
     private static final Logger logger = LoggerFactory.getLogger(LoginService.class);
 
-    @Override
+  
     public User loadUserByUsername(final String username) throws UsernameNotFoundException {
 
         logger.info("username : " + username);

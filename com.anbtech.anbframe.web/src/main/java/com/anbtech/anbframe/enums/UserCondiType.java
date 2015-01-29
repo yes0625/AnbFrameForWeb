@@ -1,4 +1,4 @@
-package com.anbtch.anbframe.enums;
+package com.anbtech.anbframe.enums;
 
 /**
  * User 조건 이넘

@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.anbtech.anbframe.security.service.LoginService;
@@ -25,13 +26,15 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     LoginService loginService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    //@Autowired
+    //private PasswordEncoder passwordEncoder;
+    
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    @Autowired
+    //@Autowired
     private SaltSource saltSource;
 
-    @Override
+  
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
@@ -43,7 +46,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
             user = loginService.loadUserByUsername(username);
 
-            String hashedPassword = passwordEncoder.encodePassword(password, saltSource.getSalt(user));
+            String hashedPassword = "";//passwordEncoder.encodePassword(password, saltSource.getSalt(user));
 
             logger.info("username : " + username + " / password : " + password + " / hash password : " + hashedPassword);
             logger.info("username : " + user.getUsername() + " / password : " + user.getPassword());
@@ -65,7 +68,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         return new UsernamePasswordAuthenticationToken(user, password, authorities);
     }
 
-    @Override
+ 
     public boolean supports(Class<?> arg0) {
         return true;
     }
