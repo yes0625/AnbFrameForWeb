@@ -57,13 +57,7 @@ public class RankManageController {
 	*/
 	@ResponseBody
 	@RequestMapping(value="/rank_list", method=RequestMethod.GET)
-	public Map selectRankInfo(@RequestParam(required=false,value="name") String name){
-		
-		Map<String,Object> map = new HashMap<String,Object>();
-		
-		Map<String,Object> key_map = new HashMap<String,Object>();
-		
-		Map<String,Object> grid_map = new HashMap<String,Object>();
+	public List selectRankInfo(@RequestParam(required=false,value="name") String name){
 		
 		List<AnbRank> list = new ArrayList<AnbRank>();
 		
@@ -83,22 +77,12 @@ public class RankManageController {
 				vo.setAnbEmployees(null);
 			}
 			
-			Map<String,Object> list_map = new HashMap<String,Object>();
-			list_map.put("nc_list", list);
-			
-			grid_map.put("grid_todolist", list_map);
-			
-			key_map.put("message", "");
-			key_map.put("recordSets", grid_map);
-			
-			map.put("dataSet", key_map);
-			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return map;
+		return list;
 	}
 	
 }

@@ -9,6 +9,13 @@
 	<title>직원관리</title>
 	<%@ include file="/WEB-INF/views/common-header.jspf"%>
 	<%@ include file="/WEB-INF/views/common-taglib.jspf"%>
+	<script type="text/javascript">
+		$(document).ajaxStart(function(){
+			$("#wrapper").ajaxloader('show','tata-ajax-loader-img2');
+		}).ajaxStop(function() {
+			$("#wrapper").ajaxloader('hide','tata-ajax-loader-img2');
+		});;
+	</script>
 </head>
 <body>
 <div id="wrapper" class="well">
