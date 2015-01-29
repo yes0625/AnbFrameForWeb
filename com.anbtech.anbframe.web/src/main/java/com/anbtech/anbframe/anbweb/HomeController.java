@@ -36,4 +36,10 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value="/index")
+	public String index(){
+		logger.info("[START PAGE]");
+		return "tiles:main/index";
+	}
+	
 }

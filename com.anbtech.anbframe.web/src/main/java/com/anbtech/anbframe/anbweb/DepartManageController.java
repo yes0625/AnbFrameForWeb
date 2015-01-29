@@ -41,7 +41,7 @@ public class DepartManageController {
 		//DeptManageVO param = new DeptManageVO();
 		//model.addAttribute("list", userMngService.getListUser(param).size());
 		
-		return "/department/departList";
+		return "tiles:department/departList";
 	}
 	
 	@ResponseBody

@@ -32,7 +32,7 @@ public class RankManageController {
 	
 	@RequestMapping(value="/manage_rank", method=RequestMethod.GET)
 	public String manageRankMain(){
-		return "admin/manage_rank";
+		return "tiles:admin/manage_rank";
 	}
 	/*
 	

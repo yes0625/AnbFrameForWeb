@@ -11,7 +11,7 @@
 	<%@ include file="/WEB-INF/views/common-taglib.jspf"%>
 </head>
 <body>
-<div id="wrapper">
+<div id="wrapper" class="well">
 	<div id="container">
 		<div id="content" class="clear">
 			<!-- left menu 시작 -->
